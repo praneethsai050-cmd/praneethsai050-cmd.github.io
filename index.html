@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A. Praneeth Sai | Cybersecurity, AI & Systems Engineer</title>
+  <meta name="description" content="Portfolio of A. Praneeth Sai - BTech CSE (Cyber Security) at JUIT Solan, SIH 2026 Team Leader (CYPHER-X), Product Engineer." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              cyber: '#10b981', // Emerald
+              cyan: '#06b6d4',  // Cyan
+              purple: '#8b5cf6', // Violet
+              dark: '#070a13',  // Ultra dark navy/black
+              card: 'rgba(15, 23, 42, 0.75)',
+              border: 'rgba(51, 65, 85, 0.45)',
+            }
+          },
+          animation: {
+            'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'fade-in': 'fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          },
+          keyframes: {
+            glowPulse: {
+              '0%, 100%': { opacity: '0.4', filter: 'blur(30px)' },
+              '50%': { opacity: '0.8', filter: 'blur(45px)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(12px)' },
+              '100%': { opacity: '1', transform: 'translateY(0px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070a13;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Grid Canvas & Background */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    .glass-card {
+      background: rgba(13, 20, 36, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.15);
+    }
+
+    .terminal-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .terminal-scroll::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+
+    /* Focus Mode Tab Hide/Show */
+    .view-section {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .view-section.hidden-tab {
+      display: none !important;
+    }
+
+    /* Active Tab Glow */
+    .tab-active {
+      background: rgba(16, 185, 129, 0.15) !important;
+      color: #34d399 !important;
+      border-color: rgba(52, 211, 153, 0.4) !important;
+      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.3) !important;
+    }
+  </style>
+</head>
+
+<body class="bg-[#060810] text-slate-200 font-sans selection:bg-emerald-500/30 selection:text-emerald-300 relative overflow-x-hidden pb-24">
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed top-[-100px] left-[-100px] w-[500px] h-[500px] bg-emerald-500/15 rounded-full pointer-events-none animate-glow-pulse -z-10"></div>
+  <div class="fixed bottom-[-150px] right-[-100px] w-[600px] h-[600px] bg-purple-600/10 rounded-full pointer-events-none animate-glow-pulse -z-10" style="animation-delay: 1.5s;"></div>
+  <div class="fixed top-[40%] right-[10%] w-[400px] h-[400px] bg-cyan-500/10 rounded-full pointer-events-none animate-glow-pulse -z-10" style="animation-delay: 2.5s;"></div>
+
+  <!-- Background Grid Canvas -->
+  <canvas id="matrix-canvas" class="fixed inset-0 pointer-events-none opacity-20 -z-10"></canvas>
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none -z-10"></div>
+
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-[#060810]/85 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#overview" onclick="switchSection('overview')" class="flex items-center gap-2 group cursor-pointer">
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 group-hover:border-emerald-400 transition-colors">
+          <i data-lucide="shield" class="w-5 h-5"></i>
+        </div>
+        <span class="font-mono font-bold text-lg tracking-wider text-slate-100 group-hover:text-emerald-400 transition-colors">
+          praneeth<span class="text-emerald-400">.sec</span>
+        </span>
+      </a>
+
+      <!-- Quick Social & Contact Header Actions -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/praneethsai050-cmd" target="_blank" rel="noopener noreferrer" 
+           class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="GitHub Profile">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" rel="noopener noreferrer" 
+           class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="LinkedIn Profile">
+          <i data-lucide="linkedin" class="w-5 h-5"></i>
+        </a>
+        <button onclick="switchSection('contact')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-emerald-500 text-black hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
+          <span>Get in Touch</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== INTERACTIVE WORKSPACE HUB / CATEGORY BAR ==================== -->
+    <div class="border-t border-slate-800/80 bg-slate-950/70 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-2.5">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3">
+        
+        <!-- Category Workspace Tabs -->
+        <nav id="workspace-tabs" class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none font-mono text-xs">
+          <button onclick="switchSection('overview')" id="tab-overview" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0 tab-active">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+            <span>Overview</span>
+          </button>
+          
+          <button onclick="switchSection('sih')" id="tab-sih" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0">
+            <i data-lucide="play-circle" class="w-3.5 h-3.5 text-red-400"></i>
+            <span>SIH Presentation & Demo</span>
+          </button>
+
+          <button onclick="switchSection('projects')" id="tab-projects" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0">
+            <i data-lucide="folder-git-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+            <span>Engineering & Repos</span>
+          </button>
+
+          <button onclick="switchSection('skills')" id="tab-skills" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0">
+            <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-purple-400"></i>
+            <span>Security Arsenal</span>
+          </button>
+
+          <button onclick="switchSection('terminal')" id="tab-terminal" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0">
+            <i data-lucide="terminal" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span>Cyber Terminal</span>
+          </button>
+
+          <button onclick="switchSection('contact')" id="tab-contact" 
+                  class="workspace-tab px-3.5 py-1.5 rounded-lg border border-slate-800 text-slate-400 hover:text-slate-200 transition flex items-center gap-1.5 shrink-0">
+            <i data-lucide="send" class="w-3.5 h-3.5 text-amber-400"></i>
+            <span>Contact</span>
+          </button>
+        </nav>
+
+        <!-- View Experience Mode Switcher (Tabbed Workspace vs Linear Scroll) -->
+        <div class="flex items-center gap-2 shrink-0 text-[11px] font-mono border-t md:border-t-0 pt-1 md:pt-0 border-slate-800">
+          <span class="text-slate-500 hidden sm:inline">Experience:</span>
+          <div class="bg-slate-900 border border-slate-800 p-0.5 rounded-lg flex items-center">
+            <button onclick="setUxMode('workspace')" id="btn-mode-workspace" 
+                    class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 font-semibold transition flex items-center gap-1">
+              <i data-lucide="layout-grid" class="w-3 h-3"></i>
+              <span>Workspace</span>
+            </button>
+            <button onclick="setUxMode('scroll')" id="btn-mode-scroll" 
+                    class="px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition flex items-center gap-1">
+              <i data-lucide="arrow-down-up" class="w-3 h-3"></i>
+              <span>Continuous</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-16">
+
+    <!-- ==================== SECTION 1: OVERVIEW & HERO ==================== -->
+    <div id="section-overview" class="view-section space-y-16">
+      
+      <!-- Hero Banner -->
+      <section class="relative pt-4 pb-8 flex flex-col lg:flex-row items-center justify-between gap-12">
+        <div class="flex-1 space-y-6 text-left">
+          
+          <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/90 border border-emerald-500/30 text-xs font-mono text-emerald-400 shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>Jaypee University of Information Technology (JUIT)</span>
+          </div>
+
+          <div class="space-y-3">
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Hi, I'm <br class="hidden sm:block"/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400">
+                A. Praneeth Sai
+              </span>
+            </h1>
+
+            <!-- Dynamic Typing Text -->
+            <div class="h-8 flex items-center">
+              <span class="font-mono text-lg sm:text-xl text-slate-300">
+                <span id="typed-text" class="text-emerald-400 font-semibold"></span>
+                <span class="animate-pulse text-emerald-400">|</span>
+              </span>
+            </div>
+
+            <p class="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed pt-2">
+              Engineering student specialized in <strong class="text-emerald-300">Cybersecurity</strong> & <strong class="text-cyan-300">Computer Science</strong> at <strong class="text-slate-200">JUIT Solan</strong>. Focused on penetration testing, security automation, and building production-grade architectures.
+            </p>
+          </div>
+
+          <!-- Quick Badges -->
+          <div class="flex flex-wrap gap-2.5 pt-2 text-xs font-mono">
+            <span class="px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-400"></i> Ambala, HR / Solan, HP
+            </span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-cyan-400"></i> BTech CSE (Cyber Security)
+            </span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i> SIH 2026 Team Leader
+            </span>
+            <span class="px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="award" class="w-3.5 h-3.5 text-purple-400"></i> RIDEHACK'26 Finalist (Noida Finals)
+            </span>
+          </div>
+
+          <!-- Fast Action Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-4">
+            <button onclick="switchSection('sih')" class="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-red-500 to-rose-600 text-white font-semibold hover:from-red-400 hover:to-rose-500 transition-all shadow-lg shadow-red-500/25 flex items-center gap-2">
+              <i data-lucide="play-circle" class="w-4 h-4"></i>
+              <span>Watch SIH PPT & Demo</span>
+            </button>
+            <button onclick="switchSection('projects')" class="px-6 py-3 rounded-xl font-medium bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 text-slate-200 transition-all flex items-center gap-2">
+              <i data-lucide="folder-git-2" class="w-4 h-4 text-emerald-400"></i>
+              <span>Explore Projects</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Visual Widget: Cyber ID Card -->
+        <div class="w-full lg:w-[420px] flex justify-center">
+          <div class="w-full max-w-sm glass-card rounded-2xl p-6 relative border border-slate-800 shadow-2xl">
+            <div class="absolute -top-3 -right-3 px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-[10px] font-mono text-emerald-300 uppercase tracking-widest">
+              Verified Identity
+            </div>
+
+            <div class="flex items-center gap-4 border-b border-slate-800 pb-5">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 p-0.5 shadow-md">
+                <div class="w-full h-full bg-slate-900 rounded-2xl flex items-center justify-center font-mono font-bold text-2xl text-emerald-400">
+                  APS
+                </div>
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-white">A. Praneeth Sai</h3>
+                <p class="text-xs text-slate-400 font-mono">@praneethsai050-cmd</p>
+                <div class="flex items-center gap-1.5 mt-1 text-xs text-emerald-400 font-mono">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Active Builder
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 space-y-2.5 text-xs font-mono">
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-500">Institution:</span>
+                <span class="text-slate-300 font-medium">JUIT Waknaghat</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-500">Specialization:</span>
+                <span class="text-emerald-400 font-medium">Cybersecurity & AI</span>
+              </div>
+              <div class="flex justify-between py-1 border-b border-slate-800/60">
+                <span class="text-slate-500">Hackathons:</span>
+                <span class="text-cyan-400 font-medium">SIH 2026, RIDEHACK Finals, KVS 3rd</span>
+              </div>
+              <div class="flex justify-between py-1">
+                <span class="text-slate-500">Status:</span>
+                <span class="text-purple-400 font-medium">Engineering Solo Systems</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-between items-center">
+              <a href="https://github.com/praneethsai050-cmd" target="_blank" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition">
+                <i data-lucide="github" class="w-4 h-4"></i> GitHub Repos
+              </a>
+              <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" class="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 transition">
+                <i data-lucide="external-link" class="w-4 h-4"></i> LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mission Highlights -->
+      <section class="space-y-6 pt-4 border-t border-slate-800/60">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
+          <h2 class="text-2xl font-bold text-white tracking-tight">Core Engineering Focus</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-base font-semibold text-white">System Hardening & Security</h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Penetration testing, Linux kernel fundamentals, and security automation with Python. Proactive system defense mindset.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+              <i data-lucide="blocks" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-base font-semibold text-white">Blockchain & Credential Integrity</h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Leading Satyameva Aegis at SIH 2026 to eliminate academic degree forgery using cryptographic ledger anchors and QR validation.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-base font-semibold text-white">Product Engineering</h3>
+            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              Shipping end-to-end applications that merge secure backends with modern client-side user experiences and minimal dependencies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== SECTION 2: SIH 2026 PRESENTATION & DEMO STUDIO ==================== -->
+    <div id="section-sih" class="view-section space-y-8">
+      
+      <!-- Studio Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 bg-red-500 rounded-full"></div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight flex items-center gap-2.5 flex-wrap">
+              <span>SIH 2026 & RIDEHACK'26 Presentation Studio</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-red-500/20 text-red-400 border border-red-500/40">SIH26125</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40">RIDEHACK NOIDA FINALIST</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 font-mono mt-0.5">Satyameva Aegis • Team CYPHER-X • Selected for Grand Final Round at JIIT Noida • JUIT Waknaghat</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono">
+          <span class="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center gap-1.5">
+            <i data-lucide="crown" class="w-3.5 h-3.5"></i> A. Praneeth Sai (Team Leader)
+          </span>
+          <a href="https://youtu.be/Uu-bOJTZrFY" target="_blank" class="px-3 py-1.5 rounded-lg bg-red-600/20 border border-red-500/40 text-red-300 hover:text-white hover:bg-red-600/30 transition flex items-center gap-1.5">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> YouTube
+          </a>
+        </div>
+      </div>
+
+      <!-- Studio Mode Switcher: Video Player vs Slide Deck vs PDF Reader vs Team CYPHER-X -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3 font-mono text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="setStudioView('video')" id="studio-btn-video" 
+                  class="px-4 py-2 rounded-xl bg-red-500/20 text-red-300 border border-red-500/40 font-semibold transition flex items-center gap-2">
+            <i data-lucide="video" class="w-4 h-4"></i>
+            <span>YouTube Pitch & Demo</span>
+          </button>
+
+          <button onclick="setStudioView('slides')" id="studio-btn-slides" 
+                  class="px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition flex items-center gap-2">
+            <i data-lucide="presentation" class="w-4 h-4"></i>
+            <span>Official PPT Slide Deck</span>
+          </button>
+
+          <button onclick="setStudioView('pdf')" id="studio-btn-pdf" 
+                  class="px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition flex items-center gap-2">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Embedded SIH PDF Reader</span>
+          </button>
+
+          <button onclick="setStudioView('team')" id="studio-btn-team" 
+                  class="px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4"></i>
+            <span>Team CYPHER-X Roster</span>
+          </button>
+        </div>
+
+        <!-- Quick PPT Download Links -->
+        <div class="flex items-center gap-2 text-[11px]">
+          <a href="docs/SIH_2026_Satyameva_Idea_Template.pptx" download class="px-2.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 transition flex items-center gap-1.5" title="Download Official SIH PPTX (2.9 MB)">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> SIH PPT (.pptx)
+          </a>
+          <a href="docs/SIH_2026_Satyameva_Idea_Template.pdf" target="_blank" class="px-2.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 transition flex items-center gap-1.5" title="View or Download SIH PDF (1.2 MB)">
+            <i data-lucide="file-check" class="w-3.5 h-3.5"></i> SIH PDF
+          </a>
+          <a href="docs/RIDEHACK_2026_Satyameva_Aegis.pdf" target="_blank" class="px-2.5 py-1.5 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 transition flex items-center gap-1.5" title="RIDEHACK Finals Pitch PDF">
+            <i data-lucide="trophy" class="w-3.5 h-3.5"></i> RIDEHACK Deck
+          </a>
+        </div>
+      </div>
+
+      <!-- STUDIO VIEW 1: Direct YouTube Player with Chapter Scrubbing -->
+      <div id="studio-view-video" class="space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Embedded YouTube Video Container -->
+          <div class="lg:col-span-8 glass-card rounded-2xl p-4 sm:p-5 border-red-500/30 shadow-2xl flex flex-col justify-between">
+            <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-slate-800 shadow-inner">
+              <iframe 
+                id="sih-yt-frame"
+                class="w-full h-full"
+                src="https://www.youtube-nocookie.com/embed/Uu-bOJTZrFY?enablejsapi=1&rel=0" 
+                title="Satyameva Aegis - SIH 2026 Presentation and Demonstration by Praneeth Sai" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <!-- Direct Chapter Jump Controls -->
+            <div class="mt-4 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-slate-400">Chapters:</span>
+                <button onclick="jumpVideoTimestamp(0)" class="px-2.5 py-1 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 transition flex items-center gap-1">
+                  <i data-lucide="play" class="w-3 h-3 text-emerald-400"></i> PPT Pitch Walkthrough
+                </button>
+                <button onclick="jumpVideoTimestamp(120)" class="px-2.5 py-1 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 transition flex items-center gap-1">
+                  <i data-lucide="play" class="w-3 h-3 text-cyan-400"></i> Live System Demonstration
+                </button>
+              </div>
+
+              <span class="text-slate-500 text-[11px]">Duration: Full Pitch & Demo</span>
+            </div>
+          </div>
+
+          <!-- Video Companion Highlights -->
+          <div class="lg:col-span-4 glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Dual Architecture
+              </div>
+
+              <h3 class="text-lg font-bold text-white">
+                Satyameva Aegis System Scope
+              </h3>
+
+              <div class="space-y-3 text-xs text-slate-300">
+                <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                  <div class="font-bold text-emerald-400 flex items-center gap-1.5">
+                    <i data-lucide="file-check" class="w-3.5 h-3.5"></i> Presentation (Official SIH PPT)
+                  </div>
+                  <p class="text-slate-400 leading-relaxed text-[11px]">
+                    Analysis of the ₹1,000+ Cr credential forgery black market in India, ₹0.08 Polygon issuance, and our cryptographic ledger intervention.
+                  </p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800 space-y-1">
+                  <div class="font-bold text-cyan-400 flex items-center gap-1.5">
+                    <i data-lucide="laptop" class="w-3.5 h-3.5"></i> Live Demonstration
+                  </div>
+                  <p class="text-slate-400 leading-relaxed text-[11px]">
+                    Hands-on walk-through of the Student Dashboard, Gemini AI Issuer Portal, and sub-3 second QR verification pipeline.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+              <button onclick="setStudioView('slides')" class="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                <span>View Real PPT Slides</span> <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <a href="docs/SIH_2026_Satyameva_Idea_Template.pptx" download class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> PPTX
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STUDIO VIEW 2: Interactive PPT Slide Deck Viewer with Actual Slide Images & Thumbnails -->
+      <div id="studio-view-slides" class="hidden space-y-6">
+        <div class="glass-card rounded-2xl p-4 sm:p-7 border-slate-800 space-y-6">
+          
+          <!-- Slide Deck Toolbar: Deck Switcher & Navigation -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-2 flex-wrap">
+              <!-- Switch between SIH 2026 and RIDEHACK Decks -->
+              <div class="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono">
+                <button onclick="switchDeck('sih')" id="deck-btn-sih" 
+                        class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/40 transition">
+                  🏅 SIH 2026 Deck (6 Slides)
+                </button>
+                <button onclick="switchDeck('ridehack')" id="deck-btn-ridehack" 
+                        class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">
+                  🏆 RIDEHACK'26 Finals (8 Slides)
+                </button>
+              </div>
+
+              <span id="slide-category-badge" class="text-[10px] font-mono px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                SYSTEM WORKFLOW
+              </span>
+            </div>
+
+            <!-- Slide Counter, Prev/Next & Fullscreen Modal Trigger -->
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-mono text-slate-400">
+                Slide <span id="slide-num-current" class="text-emerald-400 font-bold">1</span> of <span id="slide-num-total">6</span>
+              </span>
+
+              <div class="flex items-center gap-1.5">
+                <button onclick="prevSlide()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition" title="Previous Slide">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <button onclick="nextSlide()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 transition" title="Next Slide">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+                <button onclick="openSlideModal()" class="p-2 rounded-lg bg-slate-900 border border-slate-700 text-cyan-400 hover:text-cyan-300 hover:border-cyan-500 transition" title="Expand Slide Fullscreen">
+                  <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide Display Split Layout: High-Res Slide Image + Architectural Takeaways -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            
+            <!-- Left: Visual Slide Image Container -->
+            <div class="lg:col-span-7 flex flex-col justify-between rounded-2xl bg-black/80 border border-slate-800 p-3 shadow-2xl relative group overflow-hidden">
+              <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black flex items-center justify-center cursor-pointer" onclick="openSlideModal()">
+                <img id="slide-img" 
+                     src="docs/sih_slides/slide_1.png" 
+                     alt="Official Presentation Slide" 
+                     class="w-full h-full object-contain transition duration-300 group-hover:scale-[1.02]" />
+                
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span class="px-3 py-1.5 rounded-xl bg-black/80 border border-emerald-500/50 text-emerald-400 font-mono text-xs flex items-center gap-1.5 shadow-xl">
+                    <i data-lucide="zoom-in" class="w-4 h-4"></i> Click to Zoom Full Resolution
+                  </span>
+                </div>
+              </div>
+
+              <div class="mt-2 pt-2 border-t border-slate-900 flex items-center justify-between text-[11px] font-mono text-slate-500 px-1">
+                <span id="slide-footer-label">Official Smart India Hackathon Submission</span>
+                <span class="text-emerald-400 cursor-pointer hover:underline" onclick="openSlideModal()">Full 3000x1688 Res ↗</span>
+              </div>
+            </div>
+
+            <!-- Right: Architectural Breakdown & Bullets -->
+            <div class="lg:col-span-5 rounded-2xl bg-[#090d19] border border-slate-800 p-5 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <h3 id="slide-title" class="text-lg sm:text-xl font-bold text-white leading-snug">
+                  1. End-to-End Blockchain Credentialing Architecture
+                </h3>
+                
+                <p id="slide-summary" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  Complete operational blueprint uniting Issuer Authentication, Student Authentication, and Public Verification Portal. Features 60-second ephemeral QR codes and permanent cryptographic verification links.
+                </p>
+                
+                <div id="slide-bullets" class="space-y-2.5 pt-1 text-xs font-mono">
+                  <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+                    🏛️ <strong>Issuer & Student Dashboards:</strong> Automated bulk marksheet upload and on-chain anchoring.
+                  </div>
+                  <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+                    ⏱️ <strong>60s Ephemeral QR:</strong> Time-sensitive dynamic QR generation prevents replay and theft.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Actions -->
+              <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono">
+                <a id="deck-download-pptx" href="docs/SIH_2026_Satyameva_Idea_Template.pptx" download class="text-emerald-400 hover:text-emerald-300 flex items-center gap-1">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i> Download Deck (.pptx)
+                </a>
+                <button onclick="setStudioView('pdf')" class="text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Open Full PDF
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Clickable Thumbnail Ribbon -->
+          <div class="space-y-2 pt-2">
+            <div class="text-[11px] font-mono text-slate-400 flex items-center justify-between">
+              <span>Select Slide to Preview:</span>
+              <span class="text-slate-500">Keyboard: &larr; / &rarr; arrow keys</span>
+            </div>
+            <div id="slide-thumbnails-container" class="grid grid-cols-3 sm:grid-cols-6 gap-2.5 overflow-x-auto pb-1">
+              <!-- Injected by JavaScript -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STUDIO VIEW 3: Embedded Official SIH PDF Reader -->
+      <div id="studio-view-pdf" class="hidden space-y-4">
+        <div class="glass-card rounded-2xl p-4 sm:p-6 border-slate-800 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+            <div>
+              <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>Official SIH 2026 Idea Submission PDF</span>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">SIH26125</span>
+              </h3>
+              <p class="text-xs text-slate-400 font-mono mt-0.5">Satyameva Aegis • Team CYPHER-X • Jaypee University of Information Technology</p>
+            </div>
+
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <a href="docs/SIH_2026_Satyameva_Idea_Template.pdf" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1.5">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open In New Tab
+              </a>
+              <a href="docs/SIH_2026_Satyameva_Idea_Template.pptx" download class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition flex items-center gap-1.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PPTX
+              </a>
+            </div>
+          </div>
+
+          <!-- Embedded PDF Document Viewer -->
+          <div class="relative w-full h-[650px] rounded-xl overflow-hidden bg-black border border-slate-800 shadow-2xl">
+            <object data="docs/SIH_2026_Satyameva_Idea_Template.pdf#toolbar=1&navpanes=0&scrollbar=1" type="application/pdf" class="w-full h-full">
+              <iframe src="docs/SIH_2026_Satyameva_Idea_Template.pdf" class="w-full h-full border-0">
+                <div class="p-8 text-center text-slate-400 font-mono space-y-4">
+                  <p>Your browser doesn't have an inline PDF reader plugin.</p>
+                  <a href="docs/SIH_2026_Satyameva_Idea_Template.pdf" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 text-black font-semibold inline-block">
+                    Click here to open and view the SIH PPT PDF
+                  </a>
+                </div>
+              </iframe>
+            </object>
+          </div>
+        </div>
+      </div>
+
+      <!-- STUDIO VIEW 3: Team CYPHER-X Official Roster (RIDEHACK'26 & SIH 2026) -->
+      <div id="studio-view-team" class="hidden space-y-8">
+        
+        <!-- SECTION A: RIDEHACK'26 Founding Team & Grand Finalists (4 Members) -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border-purple-500/30 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                  TEAM ID: 10
+                </span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                  TRL 6 WORKING PROTOTYPE
+                </span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                  4 FOUNDING MEMBERS
+                </span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                <span>RIDEHACK'26 Team Roster</span>
+                <span class="text-purple-400 font-mono text-base font-normal">(Grand Finals @ JIIT Noida • 1st Nov 2026)</span>
+              </h3>
+              <p class="text-xs text-slate-400 font-mono">
+                Team "Satyameva Aegis" • Institution's Innovation Council (IIC), Jaypee Group • JIIT Sector 128 (Wish Town Campus), Noida
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300">
+                🏆 Grand Finalist Delegation
+              </span>
+            </div>
+          </div>
+
+          <!-- RIDEHACK 4-Member Founders Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            
+            <!-- Member 1: A. Praneeth Sai -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="crown" class="w-3.5 h-3.5"></i> Founder & Sole Backend / Protocol Architect
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Waknaghat</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">A. Praneeth Sai</h4>
+                <p class="text-xs text-emerald-400 font-mono mt-0.5">B.Tech CSE (Cyber Security) • Full Backend & Blockchain Engineer</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Sole developer of all backend services, consensus algorithms, and cryptographic pipelines. Built the custom Proof-of-Work blockchain engine from scratch (zero gas fees), Python/Flask microservices backend, PBKDF2-HMAC-SHA256 (100k rounds) dynamic credential salting, OpenCV 128D biometric facial anti-impersonation, and PIL pixel tamper difference heatmap generator.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">100% Backend Architecture</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">Custom PoW Engine</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">PBKDF2 & OpenCV Security</span>
+              </div>
+            </div>
+
+            <!-- Member 2: Anushka Bansal -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="database" class="w-3.5 h-3.5"></i> Co-Founder & Data Integrity / Research Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Waknaghat</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Anushka Bansal</h4>
+                <p class="text-xs text-cyan-400 font-mono mt-0.5">B.Tech Bioinformatics • Computational Research Lead</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Computational systems and data validation specialist. Spearheaded research on forensic data integrity heuristics, mathematical data structures, tamper-detection benchmarks, cross-institution academic dataset modeling, and driving the platform’s expansion into research credentialing.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">Data Integrity Heuristics</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">Computational Research</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">Dataset Validation</span>
+              </div>
+            </div>
+
+            <!-- Member 3: Shashank Ray -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-purple-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Co-Founder & AI Model Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Waknaghat</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Shashank Ray</h4>
+                <p class="text-xs text-purple-400 font-mono mt-0.5">B.Tech CSE (AI & ML) • AI Ingestion & Commercials Lead</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                AI extraction and business modeling specialist. Engineered Google Gemini 2.0 Flash prompt pipelines for automated OCR extraction of single/bulk marksheets, evaluated multi-campus node scalability, and structured the B2B university SaaS model (₹1.5L/campus annual SaaS + ₹25 API calls).
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">Gemini 2.0 Flash OCR</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">Document Parsing Prompts</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">B2B SaaS Commercials</span>
+              </div>
+            </div>
+
+            <!-- Member 4: Sameeksha Chandel -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> Co-Founder & Product / Operations Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Waknaghat</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Sameeksha Chandel</h4>
+                <p class="text-xs text-amber-400 font-mono mt-0.5">B.Tech CSE (AI & ML) • Product & Operations Lead</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Spearheaded product lifecycle, campus operational rollout workflows, student dashboard self-sovereign wallet experience, National Education Policy (NEP 2020) regulatory compliance, and venture pitch structuring for the incubation panel.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">Product Lifecycle</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">NEP 2020 Compliance</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">Operations & Pitch</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIDEHACK Context Ribbon -->
+          <div class="p-4 rounded-xl bg-purple-500/5 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono text-slate-400">
+            <div class="flex items-center gap-2 text-slate-300">
+              <i data-lucide="map-pin" class="w-4 h-4 text-purple-400"></i>
+              <span>Grand Finals Venue: JIIT Sector 128 (Wish Town Campus), Noida • 1st Nov 2026</span>
+            </div>
+            <span class="text-purple-400 font-semibold flex items-center gap-1.5">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Shortlisted Finalist Delegation (JUIT ➔ JIIT)
+            </span>
+          </div>
+        </div>
+
+        <!-- SECTION B: SIH 2026 Hackathon Squad -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 border-slate-800 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                  PS: SIH26125
+                </span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                  MINISTRY LEVEL
+                </span>
+              </div>
+              <h3 class="text-xl font-bold text-white mt-1">Smart India Hackathon 2026 Squad</h3>
+              <p class="text-xs text-slate-400 font-mono mt-0.5">Team CYPHER-X • Jaypee University of Information Technology (JUIT Solan)</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-mono bg-amber-500/10 text-amber-400 border border-amber-500/30">
+              6 Members Squad
+            </span>
+          </div>
+
+          <!-- SIH 2026 6-Member Squad Grid (High-Detail Matching RIDEHACK Cards) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            
+            <!-- Member 1: A. Praneeth Sai -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="crown" class="w-3.5 h-3.5"></i> Team Leader & Sole Backend / Core Architect
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition">A. Praneeth Sai</h4>
+                <p class="text-xs text-emerald-400 font-mono mt-0.5">B.Tech CSE (Cyber Security) • Full Backend & Blockchain Engineer</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Sole developer of 100% backend architecture, database schemas, and cryptographic consensus. Built the custom Proof-of-Work blockchain engine, Node.js + Web3.js asynchronous pipelines, SQLite/SQLAlchemy ORM, PBKDF2 salting, Polygon smart contracts (~₹0.08 minting), and multi-sig (2-of-3) key compromise safeguards.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">100% Backend & DB</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">PoW Blockchain Core</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-emerald-300">Web3.js & Polygon</span>
+              </div>
+            </div>
+
+            <!-- Member 2: Jai Chauhan -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="network" class="w-3.5 h-3.5"></i> Systems & Network Deployment Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-cyan-400 transition">Jai Chauhan</h4>
+                <p class="text-xs text-cyan-400 font-mono mt-0.5">B.Tech CSE (Cyber Security) • Systems & Infrastructure</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Systems deployment and decentralized storage specialist. Managed campus server infrastructure, local intranet node deployment, IPFS distributed pin routing for AES-256 encrypted credential certificates, and network socket listeners for instant verification pings.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">IPFS File Pinning</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">Campus Infrastructure</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-cyan-300">Socket Listeners</span>
+              </div>
+            </div>
+
+            <!-- Member 3: Jyoti Rana -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-purple-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Regulatory Compliance & Research Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-purple-400 transition">Jyoti Rana</h4>
+                <p class="text-xs text-purple-400 font-mono mt-0.5">B.Tech Computer Science & Engineering • Research Lead</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Academic research and regulatory compliance analyst. Analyzed national fake degree epidemiology from official UGC reports, verified NIST FIPS 180-4 and RFC 2104 cryptographic standards alignment, and drafted institutional credential verification protocols for university registrars.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">UGC Regulatory Reports</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">FIPS & RFC Benchmarks</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-purple-300">Registrar Workflows</span>
+              </div>
+            </div>
+
+            <!-- Member 4: Gauri -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-pink-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-pink-500/20 text-pink-300 border border-pink-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Frontend & UX Architecture Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-pink-400 transition">Gauri</h4>
+                <p class="text-xs text-pink-400 font-mono mt-0.5">B.Tech Biotechnology • Frontend & UX Architect</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Client interface and student experience architect. Designed the Student Digital Wallet portal, interactive verification web interfaces, responsive mobile layout for instant QR scanning, and accessible navigation flows for university candidates across India.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-pink-300">Student Wallet UI</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-pink-300">Responsive Scanner</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-pink-300">User Experience Flow</span>
+              </div>
+            </div>
+
+            <!-- Member 5: Sparsh -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="file-check" class="w-3.5 h-3.5"></i> Verification Protocols & Data Specs Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Sparsh</h4>
+                <p class="text-xs text-amber-400 font-mono mt-0.5">B.Tech Computer Science & Engineering • Verification Protocols</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Verification data structures and operational protocol coordinator. Mapped data schemas for institutional marksheet attributes, assisted in JSON-LD / Blockcerts schema compatibility checks, and verified digital certificate signing workflow requirements with academic bodies.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">Data Schema Mapping</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">Blockcerts Schemas</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-amber-300">Certificate Formats</span>
+              </div>
+            </div>
+
+            <!-- Member 6: Akshit Thakur -->
+            <div class="p-5 rounded-2xl bg-slate-900/90 border border-blue-500/40 space-y-3 relative overflow-hidden group">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 rounded-full text-xs font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold flex items-center gap-1">
+                  <i data-lucide="check-square" class="w-3.5 h-3.5"></i> QA & Presentation Workflow Lead
+                </span>
+                <span class="text-[11px] font-mono text-slate-500">JUIT Solan</span>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition">Akshit Thakur</h4>
+                <p class="text-xs text-blue-400 font-mono mt-0.5">B.Tech CSE (AI & Data Science) • QA & Systems Testing</p>
+              </div>
+
+              <p class="text-xs text-slate-300 leading-relaxed">
+                System evaluation and presentation workflow engineer. Executed end-to-end stress testing across 10,000+ mock records, edge-case invalidation verification, sub-3 second latency validation, hackathon pitch demonstration flows, and feasibility roadmap structuring.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px] font-mono text-slate-400">
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-blue-300">Stress & Load Testing</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-blue-300">Edge Invalidation</span>
+                <span class="px-2 py-0.5 rounded bg-black/60 border border-slate-800 text-blue-300">Demo Execution</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== SECTION 3: ENGINEERING & REPOSITORIES ==================== -->
+    <div id="section-projects" class="view-section space-y-8">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 bg-purple-500 rounded-full"></div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Engineering Projects</h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">100% Original Codebases & Research Implementations</p>
+          </div>
+        </div>
+        <a href="https://github.com/praneethsai050-cmd" target="_blank" class="text-xs font-mono text-emerald-400 hover:underline flex items-center gap-1">
+          github.com/praneethsai050-cmd <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Project 1: Satyameva Aegis (Flagship Spanning Card) -->
+        <div class="md:col-span-2 glass-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between border-emerald-500/30 hover:border-emerald-500/60 shadow-xl relative overflow-hidden group">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                  <i data-lucide="star" class="w-3.5 h-3.5"></i> Flagship Architecture • SIH 2026
+                </span>
+                <span class="px-3 py-1 rounded-full text-xs font-mono bg-purple-500/10 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
+                  <i data-lucide="trophy" class="w-3.5 h-3.5 text-purple-400"></i> RIDEHACK'26 Noida Finalist
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button onclick="switchSection('sih')" class="px-2.5 py-1 rounded bg-red-600/20 text-red-300 border border-red-500/30 text-xs font-mono hover:bg-red-600/30 transition flex items-center gap-1">
+                  <i data-lucide="play" class="w-3 h-3"></i> Watch Pitch Video
+                </button>
+                <a href="https://github.com/praneethsai050-cmd/satyameva" target="_blank" class="p-2 text-slate-400 hover:text-white transition" title="GitHub Source">
+                  <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                Satyameva Aegis
+              </h3>
+              <p class="text-xs text-slate-400 font-mono mt-1">Blockchain & Biometric Academic Credential Issuance & Instant Verification Platform</p>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed max-w-3xl">
+              Decentralized verification platform engineered for educational institutions to eliminate document fraud. Built on real admission workflow pain points (cutting manual verification from 60 minutes to under 5 minutes — a 92% reduction). Features OpenCV Euclidean Face-Lock matching (&lt;0.6 threshold), PIL-powered pixel-difference tamper maps, and PBKDF2-HMAC-SHA-256 (100,000 rounds) tamper resistance with zero exposure of sensitive student data.
+            </p>
+
+            <!-- Research Breakthrough Badges -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 font-mono text-[11px]">
+              <div class="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-slate-300">
+                <span class="text-emerald-400 font-bold block">⚡ 92% Faster</span>
+                <span class="text-slate-400 text-[10px]">60 min ➔ &lt;5 min latency</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-slate-300">
+                <span class="text-cyan-400 font-bold block">👤 Face-Lock AI</span>
+                <span class="text-slate-400 text-[10px]">128D anti-impersonation</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-slate-300">
+                <span class="text-purple-400 font-bold block">🗺️ Tamper Map</span>
+                <span class="text-slate-400 text-[10px]">Pixel-level difference</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-900/90 border border-slate-800 text-slate-300">
+                <span class="text-amber-400 font-bold block">🔒 PBKDF2 100K</span>
+                <span class="text-slate-400 text-[10px]">24x brute-force guard</span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">Python</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">OpenCV Face-Lock</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">PIL ImageChops</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">PBKDF2-HMAC-SHA256</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">QR Protocols</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-emerald-300">Gemini OCR</span>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 flex items-center gap-1.5">
+              <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i> Lead: Team CYPHER-X • JUIT Solan • JIIT Noida Finals
+            </span>
+            <a href="https://github.com/praneethsai050-cmd/satyameva" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1">
+              Inspect Repository <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: SecurePassGuard -->
+        <div class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                Cybersecurity Tool
+              </span>
+              <a href="https://github.com/praneethsai050-cmd/SecurePassGuard-" target="_blank" class="p-2 text-slate-400 hover:text-white transition" title="GitHub Source">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-white">SecurePassGuard</h3>
+              <p class="text-xs text-slate-400 font-mono mt-1">Real-Time Password Entropy & Strength Vulnerability Analyzer</p>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Lightweight client-side security application built to analyze credentials for brute-force vulnerability. Calculates character entropy in real-time, displays visual warning metrics, and suggests entropy hardening heuristics with zero server logging.
+            </p>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-cyan-300">JavaScript</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-cyan-300">Cybersecurity</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-cyan-300">Entropy Math</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-cyan-300">Client Security</span>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 flex items-center gap-1">
+              <i data-lucide="lock" class="w-3.5 h-3.5 text-cyan-400"></i> Zero Server Logging
+            </span>
+            <a href="https://github.com/praneethsai050-cmd/SecurePassGuard-" target="_blank" class="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
+              Inspect Code <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: SchoolSportsHub -->
+        <div class="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-purple-500/10 text-purple-400 border border-purple-500/30">
+                Web Application
+              </span>
+              <a href="https://github.com/praneethsai050-cmd/SchoolSportsHub" target="_blank" class="p-2 text-slate-400 hover:text-white transition" title="GitHub Source">
+                <i data-lucide="github" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-bold text-white">SchoolSportsHub</h3>
+              <p class="text-xs text-slate-400 font-mono mt-1">Inter-School Sports Match Scheduling & Team Management</p>
+            </div>
+
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Centralized platform for inter-institution sports competitions. Enables fixture generation, roster management, score tracking, and persistent client-side data state without external database latency.
+            </p>
+
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-purple-300">JavaScript</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-purple-300">DOM Architecture</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-purple-300">LocalStorage</span>
+              <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] font-mono text-purple-300">Responsive UI</span>
+            </div>
+          </div>
+
+          <div class="pt-6 mt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
+            <span class="text-slate-400 flex items-center gap-1">
+              <i data-lucide="activity" class="w-3.5 h-3.5 text-purple-400"></i> Event Management
+            </span>
+            <a href="https://github.com/praneethsai050-cmd/SchoolSportsHub" target="_blank" class="text-purple-400 hover:text-purple-300 font-semibold flex items-center gap-1">
+              Inspect Code <i data-lucide="chevron-right" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 4: SECURITY ARSENAL & MILESTONES ==================== -->
+    <div id="section-skills" class="view-section space-y-8">
+      
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="w-2 h-8 bg-cyan-400 rounded-full"></div>
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Security Arsenal & Honors</h2>
+          <p class="text-xs text-slate-400 font-mono mt-0.5">Technical Stack & Competitive Milestones</p>
+        </div>
+      </div>
+
+      <!-- Skills Matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-2.5 text-emerald-400 font-mono text-sm font-semibold">
+            <i data-lucide="code-2" class="w-4 h-4"></i> Languages
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Python</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">C Language</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">JavaScript</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Bash / Shell</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">HTML5 / CSS3</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-2.5 text-cyan-400 font-mono text-sm font-semibold">
+            <i data-lucide="shield-alert" class="w-4 h-4"></i> Security & Systems
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Penetration Testing</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Linux Internals</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Security Automation</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Password Auditing</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Blockchain / Web3</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-2.5 text-purple-400 font-mono text-sm font-semibold">
+            <i data-lucide="wrench" class="w-4 h-4"></i> Tools & Environments
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Linux (Ubuntu/Kali)</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Git & GitHub</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">VS Code</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Terminal Scripting</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Web Storage APIs</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 space-y-4">
+          <div class="flex items-center gap-2.5 text-amber-400 font-mono text-sm font-semibold">
+            <i data-lucide="workflow" class="w-4 h-4"></i> Engineering Focus
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">SIH Team Leadership</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Rapid Prototyping</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Client-Side Optimization</span>
+            <span class="px-2.5 py-1 rounded-md bg-slate-800/80 border border-slate-700 text-xs font-mono text-slate-200">Data Integrity</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Honors & Achievements -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+
+        <!-- Honor 1: RIDEHACK'26 -->
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-purple-500 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="p-2.5 rounded-xl bg-purple-500/10 text-purple-400">
+                <i data-lucide="trophy" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">FINAL ROUND</span>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">RIDEHACK'26 (Grand Finals)</h3>
+              <p class="text-xs font-mono text-purple-400 mt-0.5">Selected for Finals at JIIT Noida</p>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Selected by the Institution's Innovation Council (IIC), Jaypee Group of Institutions, to present <strong>Satyameva Aegis</strong> live at the Grand Final Round in JIIT Noida.
+            </p>
+          </div>
+          <div class="pt-3 mt-3 border-t border-slate-800/80 text-[11px] font-mono text-slate-500">
+            IIC • Jaypee Group • Innovation Pitch
+          </div>
+        </div>
+
+        <!-- Honor 2: SIH 2026 -->
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-amber-500 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="p-2.5 rounded-xl bg-amber-500/10 text-amber-400">
+                <i data-lucide="award" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">TEAM LEADER</span>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">Smart India Hackathon 2026</h3>
+              <p class="text-xs font-mono text-amber-400 mt-0.5">Team Leader • Team CYPHER-X</p>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Spearheaded the development and architectural pitch of <strong>Satyameva Aegis (SIH26125)</strong>, representing Jaypee University of Information Technology (JUIT).
+            </p>
+          </div>
+          <div class="pt-3 mt-3 border-t border-slate-800/80 text-[11px] font-mono text-slate-500">
+            Problem Statement SIH26125 • Ministry Level
+          </div>
+        </div>
+
+        <!-- Honor 3: KVS Hackathon -->
+        <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-500 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400">
+                <i data-lucide="medal" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">3RD PLACE</span>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white">KVS Hackathon (Zonal)</h3>
+              <p class="text-xs font-mono text-emerald-400 mt-0.5">3rd Place Winner</p>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Awarded 3rd prize at the Zonal competitive hackathon for engineering rapid technical prototypes and real-time system architectures under tight deadlines.
+            </p>
+          </div>
+          <div class="pt-3 mt-3 border-t border-slate-800/80 text-[11px] font-mono text-slate-500">
+            Zonal Level • Competitive Engineering
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 5: CYBER TERMINAL ==================== -->
+    <div id="section-terminal" class="view-section space-y-6">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Interactive Cyber Terminal</h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">Command-line workspace interface</p>
+          </div>
+        </div>
+
+        <button onclick="terminalClear()" class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-slate-400 hover:text-white transition">
+          clear
+        </button>
+      </div>
+
+      <div class="w-full bg-[#0a0f1d] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm">
+        <!-- Terminal Header -->
+        <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+            <span class="text-xs text-slate-400 ml-2">praneeth@juit-workstation:~</span>
+          </div>
+          <div class="text-[11px] text-slate-500 hidden sm:block">bash v5.2-release (type 'help')</div>
+        </div>
+
+        <!-- Terminal Body -->
+        <div id="terminal-body" class="p-5 h-80 overflow-y-auto space-y-3 terminal-scroll text-slate-300 text-xs sm:text-sm">
+          <div>
+            <span class="text-emerald-400">Welcome to Praneeth's Interactive Terminal Shell!</span><br/>
+            Type <span class="text-cyan-400 font-bold">help</span> to view available commands.
+          </div>
+        </div>
+
+        <!-- Terminal Input -->
+        <div class="bg-slate-950/70 px-5 py-3 border-t border-slate-800 flex items-center gap-2">
+          <span class="text-emerald-400 font-bold">visitor@juit:~$</span>
+          <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" 
+                 class="flex-1 bg-transparent text-slate-100 focus:outline-none font-mono text-sm caret-emerald-400" 
+                 placeholder="Type 'help' and press Enter..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== SECTION 6: CONTACT & TRANSMISSION ==================== -->
+    <div id="section-contact" class="view-section space-y-8">
+      
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Initiate Transmission</h2>
+          <p class="text-xs text-slate-400 font-mono mt-0.5">Direct Message & Collaborations</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-8 max-w-3xl mx-auto border border-slate-800">
+        <div class="text-center space-y-2 mb-8">
+          <h3 class="text-2xl font-bold text-white">Let's Connect</h3>
+          <p class="text-sm text-slate-400">
+            Have a project idea, open-source opportunity, or research collaboration? Reach out below.
+          </p>
+        </div>
+
+        <form id="contact-form" class="space-y-4" onsubmit="handleContactSubmit(event)">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-mono text-slate-400 mb-1">Your Name</label>
+              <input type="text" id="contact-name" required placeholder="John Doe" 
+                     class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
+            </div>
+            <div>
+              <label class="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
+              <input type="email" id="contact-email" required placeholder="john@example.com" 
+                     class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-1">Subject / Domain</label>
+            <input type="text" id="contact-subject" placeholder="Project Collaboration / Security Research" 
+                   class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-mono text-slate-400 mb-1">Message</label>
+            <textarea id="contact-message" rows="4" required placeholder="Write your message here..." 
+                      class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-xl font-semibold bg-emerald-500 hover:bg-emerald-400 text-black transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 text-sm">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Send Transmission</span>
+          </button>
+        </form>
+
+        <div id="contact-success" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm text-center font-mono">
+          ✅ Thank you! Preparing direct mail dispatch.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== FLOATING HUD MINI-DOCK (QUICK NAVIGATOR) ==================== -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 px-3 py-2 rounded-2xl bg-[#0a0f1d]/90 backdrop-blur-xl border border-slate-800/80 shadow-2xl flex items-center gap-2 font-mono text-xs">
+    <button onclick="switchSection('overview')" title="Overview" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="sparkles" class="w-4 h-4"></i>
+    </button>
+    <button onclick="switchSection('sih')" title="SIH Presentation & Demo" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="play-circle" class="w-4 h-4"></i>
+    </button>
+    <button onclick="switchSection('projects')" title="Projects" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-cyan-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+    </button>
+    <button onclick="switchSection('skills')" title="Security Arsenal" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-purple-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="shield-alert" class="w-4 h-4"></i>
+    </button>
+    <button onclick="switchSection('terminal')" title="Cyber Terminal" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="terminal" class="w-4 h-4"></i>
+    </button>
+    <button onclick="switchSection('contact')" title="Contact" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-amber-400 hover:bg-slate-800/60 transition">
+      <i data-lucide="send" class="w-4 h-4"></i>
+    </button>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="mt-20 border-t border-slate-800/80 bg-[#04060b] py-8 text-center text-xs font-mono text-slate-500 space-y-2">
+    <div class="flex items-center justify-center gap-6 text-slate-400 mb-2">
+      <a href="https://github.com/praneethsai050-cmd" target="_blank" class="hover:text-emerald-400 transition">GitHub</a>
+      <span>•</span>
+      <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" class="hover:text-cyan-400 transition">LinkedIn</a>
+      <span>•</span>
+      <a href="https://www.juit.ac.in/" target="_blank" class="hover:text-white transition">JUIT Solan</a>
+    </div>
+    <p>&copy; 2026 A. Praneeth Sai. Architected with precision & cybersecurity mindset.</p>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT CONTROLLERS ==================== -->
+  <script>
+    // Initialize Icons
+    lucide.createIcons();
+
+    // UX View Mode State ('workspace' = tabbed, 'scroll' = continuous)
+    let currentUxMode = 'workspace';
+    let currentActiveSection = 'overview';
+
+    const sections = ['overview', 'sih', 'projects', 'skills', 'terminal', 'contact'];
+
+    function switchSection(sectionId) {
+      currentActiveSection = sectionId;
+
+      // Update Tab Styles
+      sections.forEach(id => {
+        const tab = document.getElementById(`tab-${id}`);
+        if (tab) {
+          if (id === sectionId) {
+            tab.classList.add('tab-active');
+          } else {
+            tab.classList.remove('tab-active');
+          }
+        }
+      });
+
+      if (currentUxMode === 'workspace') {
+        // In Workspace Mode: hide other sections, show active with animation
+        sections.forEach(id => {
+          const el = document.getElementById(`section-${id}`);
+          if (el) {
+            if (id === sectionId) {
+              el.classList.remove('hidden-tab');
+              el.classList.add('animate-fade-in');
+            } else {
+              el.classList.add('hidden-tab');
+              el.classList.remove('animate-fade-in');
+            }
+          }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // In Continuous Scroll Mode: scroll to section
+        const target = document.getElementById(`section-${sectionId}`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+
+    function setUxMode(mode) {
+      currentUxMode = mode;
+      const btnWorkspace = document.getElementById('btn-mode-workspace');
+      const btnScroll = document.getElementById('btn-mode-scroll');
+
+      if (mode === 'workspace') {
+        btnWorkspace.className = "px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 font-semibold transition flex items-center gap-1";
+        btnScroll.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition flex items-center gap-1";
+        switchSection(currentActiveSection);
+      } else {
+        btnWorkspace.className = "px-2.5 py-1 rounded-md text-slate-400 hover:text-white transition flex items-center gap-1";
+        btnScroll.className = "px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 font-semibold transition flex items-center gap-1";
+
+        // Unhide all sections
+        sections.forEach(id => {
+          const el = document.getElementById(`section-${id}`);
+          if (el) el.classList.remove('hidden-tab');
+        });
+      }
+    }
+
+    // SIH Studio Internal View Switcher (video vs slides vs pdf vs team)
+    function setStudioView(view) {
+      const vVideo = document.getElementById('studio-view-video');
+      const vSlides = document.getElementById('studio-view-slides');
+      const vPdf = document.getElementById('studio-view-pdf');
+      const vTeam = document.getElementById('studio-view-team');
+
+      const bVideo = document.getElementById('studio-btn-video');
+      const bSlides = document.getElementById('studio-btn-slides');
+      const bPdf = document.getElementById('studio-btn-pdf');
+      const bTeam = document.getElementById('studio-btn-team');
+
+      // Hide all
+      vVideo.classList.add('hidden');
+      vSlides.classList.add('hidden');
+      if (vPdf) vPdf.classList.add('hidden');
+      vTeam.classList.add('hidden');
+
+      const inactive = "px-4 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition flex items-center gap-2";
+      bVideo.className = inactive;
+      bSlides.className = inactive;
+      if (bPdf) bPdf.className = inactive;
+      bTeam.className = inactive;
+
+      if (view === 'video') {
+        vVideo.classList.remove('hidden');
+        bVideo.className = "px-4 py-2 rounded-xl bg-red-500/20 text-red-300 border border-red-500/40 font-semibold transition flex items-center gap-2";
+      } else if (view === 'slides') {
+        vSlides.classList.remove('hidden');
+        bSlides.className = "px-4 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-semibold transition flex items-center gap-2";
+        renderSlide(currentSlideIndex);
+      } else if (view === 'pdf') {
+        if (vPdf) vPdf.classList.remove('hidden');
+        if (bPdf) bPdf.className = "px-4 py-2 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold transition flex items-center gap-2";
+      } else if (view === 'team') {
+        vTeam.classList.remove('hidden');
+        bTeam.className = "px-4 py-2 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-500/40 font-semibold transition flex items-center gap-2";
+      }
+      lucide.createIcons();
+    }
+
+    // YouTube Timestamp Jump Controller
+    function jumpVideoTimestamp(seconds) {
+      const iframe = document.getElementById('sih-yt-frame');
+      iframe.src = `https://www.youtube-nocookie.com/embed/Uu-bOJTZrFY?start=${seconds}&autoplay=1&rel=0`;
+    }
+
+    // Official Presentation Decks (SIH 2026 + RIDEHACK'26)
+    const sihSlides = [
+      {
+        num: 1,
+        img: "docs/sih_slides/slide_1.png",
+        cat: "SYSTEM WORKFLOW",
+        title: "1. End-to-End Blockchain Credentialing Architecture",
+        summary: "Complete operational blueprint uniting Issuer Authentication, Student Authentication, and Public Verification Portal. Features 60-second ephemeral QR codes and permanent cryptographic verification links.",
+        bullets: [
+          "🏛️ <strong>Issuer & Student Dashboards:</strong> Automated bulk marksheet upload and on-chain anchoring.",
+          "⏱️ <strong>60s Ephemeral QR:</strong> Time-sensitive dynamic QR generation prevents replay and theft."
+        ]
+      },
+      {
+        num: 2,
+        img: "docs/sih_slides/slide_2.png",
+        cat: "WHAT IS SATYAMEVA",
+        title: "2. Satyameva: 3-Second Tamper-Proof Credential Verification",
+        summary: "Replaces weeks of manual bureaucratic checks and fake degree fraud with instantaneous cryptographic validation. Certificates become self-sovereign digital assets owned permanently by students.",
+        bullets: [
+          "⚡ <strong>Sub-3s Verification:</strong> Decentralized verification eliminates central single point of failure.",
+          "🛡️ <strong>Self-Sovereign Ownership:</strong> Students hold credentials without dependency on university servers."
+        ]
+      },
+      {
+        num: 3,
+        img: "docs/sih_slides/slide_3.png",
+        cat: "TECHNICAL APPROACH",
+        title: "3. Technical Architecture & Cryptographic Engine",
+        summary: "Modern hybrid stack: React/HTML client, Node.js + Web3.js backend, SQLite/SQLAlchemy ORM, and military-grade cryptography (SHA-256, HMAC, PBKDF2). Certificate PDFs are AES-256 encrypted and IPFS pinned.",
+        bullets: [
+          "🔗 <strong>Smart Contract Anchoring:</strong> Generates SHA-256 hash digests and anchors them onto Polygon PoS.",
+          "🔐 <strong>AES-256 & IPFS:</strong> Sensitive documents encrypted with student keys and stored across decentralized IPFS."
+        ]
+      },
+      {
+        num: 4,
+        img: "docs/sih_slides/slide_4.png",
+        cat: "FEASIBILITY & COST",
+        title: "4. Production Cost Viability & Key Mitigation",
+        summary: "Engineered for real-world academic scale: ~2s transaction minting time, only ₹0.08 cost per certificate on Polygon network, and ₹8 Lakh total cost to issue 1 Crore (10M) certificates.",
+        bullets: [
+          "💰 <strong>₹0.08 Mint Cost:</strong> Extreme cost-efficiency enables nation-wide free university adoption.",
+          "🛡️ <strong>Multi-Sig Wallet (2-of-3):</strong> Mitigates key compromise with on-chain revocation capabilities."
+        ]
+      },
+      {
+        num: 5,
+        img: "docs/sih_slides/slide_5.png",
+        cat: "IMPACT & BENEFITS",
+        title: "5. Solving India's 40,000+ Fake Degree Epidemic",
+        summary: "Over 40,000 fake degrees are officially caught in India every year. Satyameva delivers ~99.99% faster verification (2-4 weeks ➔ 3 seconds) and ~99.99% cheaper auditing (₹500-₹2,000 ➔ ₹0.08) for 40M+ students.",
+        bullets: [
+          "📉 <strong>99.99% Latency Reduction:</strong> Slashes verification waiting from 1 month to 3 seconds.",
+          "🎯 <strong>Massive Scale:</strong> Tailored for 40M+ higher-education students across 1,100+ universities."
+        ]
+      },
+      {
+        num: 6,
+        img: "docs/sih_slides/slide_6.png",
+        cat: "RESEARCH REFERENCES",
+        title: "6. Research Foundation & Global Cryptographic Standards",
+        summary: "Anchored in national data and established cryptographic RFC standards: UGC Fake Universities Reports, NIST FIPS 180-4 (SHA-256), RFC 2104 (HMAC), and the W3C/Blockcerts open standard.",
+        bullets: [
+          "📚 <strong>UGC & Regulatory Alignment:</strong> Directly addresses verified regulatory fake degree incidents.",
+          "🌐 <strong>Open Standards Compliance:</strong> Compatible with Blockcerts and W3C Verifiable Credentials."
+        ]
+      }
+    ];
+
+    const ridehackSlides = [
+      {
+        num: 1,
+        img: "docs/ridehack_slides/slide_1.png",
+        cat: "RIDEHACK FINALS",
+        title: "1. Satyameva Aegis — Finalist Presentation (JIIT Noida)",
+        summary: "Official pitch deck presented at the Grand Final Round of RIDEHACK'26 held at JIIT Sector 128, Noida (1st Nov 2026), organized by IIC. Team 'Satyameva Aegis' (Team ID: 10) representing JUIT Waknaghat with 4 founding members.",
+        bullets: [
+          "🏆 <strong>4 Founders:</strong> A. Praneeth Sai (CSE-CS), Anushka Bansal (Bioinformatics), Shashank Ray (CSE-AI&ML), Sameeksha Chandel (CSE-AI&ML).",
+          "🎤 <strong>Noida Grand Finals:</strong> Selected by IIC to present before VC & incubation panel."
+        ]
+      },
+      {
+        num: 2,
+        img: "docs/ridehack_slides/slide_2.png",
+        cat: "REAL ADMISSION PROBLEM",
+        title: "2. The JUIT Admission Problem & Real-World Origin",
+        summary: "Praneeth experienced 3-hour physical queues, 15+ physical documents, risk of losing original certificates (TC replacement takes 2–6 months), and 60 minutes verification per student.",
+        bullets: [
+          "⏳ <strong>Queue Bottlenecks:</strong> 3-hour admission wait times at college reporting.",
+          "⚠️ <strong>Lost Document Risk:</strong> Migration and Transfer Certificates take months to re-issue."
+        ]
+      },
+      {
+        num: 3,
+        img: "docs/ridehack_slides/slide_3.png",
+        cat: "SYSTEM BREAKTHROUGH",
+        title: "3. Satyameva Aegis Innovation Framework",
+        summary: "Instant verification architecture combining decentralized ledger immutability with automated issuer processing and real-time verification pingers.",
+        bullets: [
+          "⚡ <strong>92% Latency Drop:</strong> Slashes verification time from 60 mins to under 5 mins.",
+          "💰 <strong>₹0 Cost:</strong> Free instant verification for recruiters and academic institutions."
+        ]
+      },
+      {
+        num: 4,
+        img: "docs/ridehack_slides/slide_4.png",
+        cat: "FACE-LOCK AI",
+        title: "4. Face-Lock AI Anti-Impersonation Matching",
+        summary: "128-dimensional Euclidean distance (<0.6) biometric comparison between certificate photograph and the candidate, preventing proxy verification.",
+        bullets: [
+          "👤 <strong>OpenCV 128D Matching:</strong> High-precision biometric comparison threshold.",
+          "🤖 <strong>Anti-Impersonation:</strong> Eliminates fake candidate impersonation at interviews."
+        ]
+      },
+      {
+        num: 5,
+        img: "docs/ridehack_slides/slide_5.png",
+        cat: "VISUAL TAMPER MAP",
+        title: "5. Pixel-Level Difference Detection Heatmap",
+        summary: "PIL ImageChops visual difference engine comparing uploaded document against original certificate, highlighting tampered grade marks or roll numbers in vivid red.",
+        bullets: [
+          "🗺️ <strong>Pixel Heatmap:</strong> Visually reveals photoshopped marks and altered text.",
+          "🔍 <strong>Forensic Evidence:</strong> Provides immediate visual audit proof for investigators."
+        ]
+      },
+      {
+        num: 6,
+        img: "docs/ridehack_slides/slide_6.png",
+        cat: "CRYPTOGRAPHIC PROOF",
+        title: "6. PBKDF2-HMAC-SHA-256 With 100,000 Rounds",
+        summary: "Cryptographic hashing with 100,000 iterations and per-document 16-byte random salt, providing 24x stronger brute-force resistance against dictionary attacks.",
+        bullets: [
+          "🔒 <strong>100K Rounds:</strong> Exponentially increases computation cost for attackers.",
+          "🛡️ <strong>Salted Hashes:</strong> Precomputed rainbow tables rendered completely ineffective."
+        ]
+      },
+      {
+        num: 7,
+        img: "docs/ridehack_slides/slide_7.png",
+        cat: "FORENSICS & IPv6",
+        title: "7. Verification Pinger & Forensic Audit Trails",
+        summary: "Automated instant email alerts dispatched to university registrars whenever verification is triggered, backed by dual-stack IPv6 forensics.",
+        bullets: [
+          "🔔 <strong>Instant Pinger:</strong> University registrars alerted on every verification check.",
+          "🌐 <strong>IPv6 Tracking:</strong> Immutable forensic logs for cyber law compliance."
+        ]
+      },
+      {
+        num: 8,
+        img: "docs/ridehack_slides/slide_8.png",
+        cat: "JAYPEE FEDERATION",
+        title: "8. Multi-Campus Jaypee Federation & Roadmap",
+        summary: "Engineered for federation across JUIT Solan, JIIT Noida, and JUET Guna, with future roadmap to scale across 40M+ students nationwide.",
+        bullets: [
+          "🏛️ <strong>Jaypee Federation:</strong> Unified credential standard across all 3 campuses.",
+          "🚀 <strong>Production Ready:</strong> Pilot ready for examination branch onboarding."
+        ]
+      }
+    ];
+
+    let currentDeck = 'sih';
+    let currentDeckData = sihSlides;
+    let currentSlideIndex = 0;
+
+    function renderThumbnails() {
+      const container = document.getElementById('slide-thumbnails-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      currentDeckData.forEach((s, idx) => {
+        const thumb = document.createElement('div');
+        thumb.id = `thumb-${idx}`;
+        thumb.className = `cursor-pointer rounded-xl overflow-hidden border p-1 bg-black/60 transition ${idx === currentSlideIndex ? 'border-emerald-500 ring-2 ring-emerald-500/30' : 'border-slate-800 hover:border-slate-600'}`;
+        thumb.onclick = () => goToSlide(idx);
+        thumb.innerHTML = `
+          <div class="aspect-video w-full rounded-lg overflow-hidden bg-black">
+            <img src="${s.img}" alt="Slide ${s.num}" class="w-full h-full object-cover" />
+          </div>
+          <div class="mt-1 flex items-center justify-between text-[10px] font-mono px-1">
+            <span class="text-slate-400">#${s.num}</span>
+            <span class="text-slate-500 truncate max-w-[65px]">${s.cat.split(' ')[0]}</span>
+          </div>
+        `;
+        container.appendChild(thumb);
+      });
+    }
+
+    function switchDeck(deck) {
+      currentDeck = deck;
+      currentDeckData = (deck === 'sih') ? sihSlides : ridehackSlides;
+      currentSlideIndex = 0;
+
+      const btnSih = document.getElementById('deck-btn-sih');
+      const btnRide = document.getElementById('deck-btn-ridehack');
+      const downloadLink = document.getElementById('deck-download-pptx');
+      const footerLabel = document.getElementById('slide-footer-label');
+
+      if (deck === 'sih') {
+        btnSih.className = "px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/40 transition";
+        btnRide.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+        if (downloadLink) downloadLink.href = "docs/SIH_2026_Satyameva_Idea_Template.pptx";
+        if (footerLabel) footerLabel.textContent = "Official Smart India Hackathon 2026 Submission";
+      } else {
+        btnRide.className = "px-3 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 font-semibold border border-purple-500/40 transition";
+        btnSih.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+        if (downloadLink) downloadLink.href = "docs/RIDEHACK_2026_Satyameva_Aegis.pptx";
+        if (footerLabel) footerLabel.textContent = "Official RIDEHACK'26 Grand Finals (JIIT Noida)";
+      }
+
+      renderThumbnails();
+      renderSlide(0);
+    }
+
+    function renderSlide(index) {
+      if (index < 0 || index >= currentDeckData.length) return;
+      currentSlideIndex = index;
+      const s = currentDeckData[index];
+
+      const imgEl = document.getElementById('slide-img');
+      if (imgEl) imgEl.src = s.img;
+
+      document.getElementById('slide-num-current').textContent = s.num;
+      document.getElementById('slide-num-total').textContent = currentDeckData.length;
+      document.getElementById('slide-category-badge').textContent = s.cat;
+      document.getElementById('slide-title').textContent = s.title;
+      document.getElementById('slide-summary').textContent = s.summary;
+
+      const bulletsContainer = document.getElementById('slide-bullets');
+      if (bulletsContainer) {
+        bulletsContainer.innerHTML = `
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+            ${s.bullets[0]}
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+            ${s.bullets[1]}
+          </div>
+        `;
+      }
+
+      // Update thumbnails active border
+      currentDeckData.forEach((_, idx) => {
+        const thumb = document.getElementById(`thumb-${idx}`);
+        if (thumb) {
+          if (idx === index) {
+            thumb.className = "cursor-pointer rounded-xl overflow-hidden border p-1 bg-black/60 transition border-emerald-500 ring-2 ring-emerald-500/30";
+          } else {
+            thumb.className = "cursor-pointer rounded-xl overflow-hidden border p-1 bg-black/60 transition border-slate-800 hover:border-slate-600";
+          }
+        }
+      });
+    }
+
+    function nextSlide() {
+      const next = (currentSlideIndex + 1) % currentDeckData.length;
+      renderSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlideIndex - 1 + currentDeckData.length) % currentDeckData.length;
+      renderSlide(prev);
+    }
+
+    function goToSlide(idx) {
+      renderSlide(idx);
+    }
+
+    function openSlideModal() {
+      const s = currentDeckData[currentSlideIndex];
+      const modal = document.getElementById('slide-modal');
+      const modalImg = document.getElementById('slide-modal-img');
+      const modalCaption = document.getElementById('slide-modal-caption');
+      if (modal && modalImg) {
+        modalImg.src = s.img;
+        if (modalCaption) modalCaption.textContent = `${s.title} (${currentDeck === 'sih' ? 'SIH 2026' : 'RIDEHACK\'26'})`;
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeSlideModal() {
+      const modal = document.getElementById('slide-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // Keyboard arrow keys for slide flipping
+    document.addEventListener('keydown', (e) => {
+      if (currentActiveSection === 'sih') {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'Escape') closeSlideModal();
+      }
+    });
+
+    // Dynamic Typing Effect
+    const phrases = [
+      "BTech CSE – Cyber Security @ JUIT Solan",
+      "SIH 2026 Team Leader (CYPHER-X)",
+      "Product Engineer & Systems Builder",
+      "KVS Hackathon Zonal 3rd Place",
+      "AI & Blockchain Security Enthusiast"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typedTextElement = document.getElementById("typed-text");
+
+    function typeLoop() {
+      const currentPhrase = phrases[phraseIndex];
+      if (isDeleting) {
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 30 : 60;
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        speed = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400;
+      }
+
+      setTimeout(typeLoop, speed);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      typeLoop();
+      renderThumbnails();
+      renderSlide(0);
+      // Initialize in Workspace Mode
+      switchSection('overview');
+    });
+
+    // Matrix Rain Canvas Animation (Subtle Background)
+    const canvas = document.getElementById("matrix-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const chars = "010101101011001CYBERNETICSJUITSIH01";
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(6, 8, 16, 0.08)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#10b981";
+      ctx.font = `${fontSize}px 'Fira Code', monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        if (Math.random() > 0.96) {
+          const text = chars.charAt(Math.floor(Math.random() * chars.length));
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        }
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.985) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 50);
+
+    // Interactive Terminal Implementation
+    const terminalBody = document.getElementById("terminal-body");
+    const terminalInput = document.getElementById("terminal-input");
+
+    const terminalCommands = {
+      help: `Available commands:
+  • <span class="text-emerald-400">about</span>     : Background summary & JUIT details
+  • <span class="text-emerald-400">sih</span>       : SIH 2026 Presentation & Demonstration
+  • <span class="text-emerald-400">ridehack</span>  : RIDEHACK'26 Grand Finals at JIIT Noida
+  • <span class="text-emerald-400">ppt</span>       : Official SIH & RIDEHACK presentation decks (.pptx / .pdf)
+  • <span class="text-emerald-400">pdf</span>       : Open embedded SIH submission PDF viewer
+  • <span class="text-emerald-400">team</span>      : List Team CYPHER-X rosters (RIDEHACK + SIH)
+  • <span class="text-emerald-400">projects</span>  : 100% original repositories & tools
+  • <span class="text-emerald-400">skills</span>    : Languages, Linux internals, & security stack
+  • <span class="text-emerald-400">video</span>     : Watch SIH presentation on YouTube
+  • <span class="text-emerald-400">github</span>    : View GitHub profile
+  • <span class="text-emerald-400">linkedin</span>  : View LinkedIn profile
+  • <span class="text-emerald-400">contact</span>   : Dispatch a direct transmission
+  • <span class="text-emerald-400">clear</span>     : Clear terminal buffer`,
+      
+      about: `A Praneeth Sai
+Domain: Cybersecurity, AI & Systems Development
+Education: BTech CSE (Cyber Security) @ Jaypee University of Information Technology (JUIT)
+Location: Ambala, Haryana & Solan, Himachal Pradesh`,
+      
+      skills: `[Languages]   : Python, C, JavaScript, Bash / Shell, HTML5/CSS3
+[Security]    : Penetration Testing, Linux Internals, Automation, Password Entropy
+[Tools]       : Git, Linux (Ubuntu/Kali), VS Code, LocalStorage API`,
+
+      projects: `1. Satyameva Aegis   : Decentralized academic credential issuance (SIH & RIDEHACK Flagship)
+2. SecurePassGuard   : Real-time password entropy & vulnerability analyzer
+3. SchoolSportsHub   : Inter-school sports match scheduling & roster manager`,
+
+      sih: `Smart India Hackathon 2026:
+Role: Team Leader
+Team: Team CYPHER-X
+Project: Satyameva Aegis (PS: SIH26125)
+Institution: Jaypee University of Information Technology (JUIT Solan)
+Features: Blockchain credential ledger, Gemini AI extraction, permanent QR instant verification`,
+
+      ppt: `📊 Official SIH 2026 & RIDEHACK'26 Presentation Decks:
+Files Available:
+  • SIH PPT Template (.pptx) : docs/SIH_2026_Satyameva_Idea_Template.pptx (2.9 MB)
+  • SIH Pitch PDF (.pdf)     : docs/SIH_2026_Satyameva_Idea_Template.pdf (1.2 MB)
+  • RIDEHACK'26 PPT (.pptx)  : docs/RIDEHACK_2026_Satyameva_Aegis.pptx
+  • RIDEHACK'26 PDF (.pdf)   : docs/RIDEHACK_2026_Satyameva_Aegis.pdf
+
+Opening PPT Slide Deck Studio now...`,
+
+      pdf: `📑 Opening Embedded Official SIH Submission PDF Viewer...
+File: docs/SIH_2026_Satyameva_Idea_Template.pdf`,
+
+      ridehack: `🏆 RIDEHACK'26 — Grand Final Round (JIIT Noida):
+Status: Selected for Grand Final Round Presentation (1st Nov 2026)
+Host: Institution's Innovation Council (IIC), Jaypee Group of Institutions
+Venue: JIIT Sector 128 (Wish Town Campus), Noida
+Startup: Satyameva Aegis (Team ID: 10)
+Founding Team (4 Members from JUIT Waknaghat):
+  1. A. Praneeth Sai — Founder & Lead Architecture Engineer (B.Tech CSE-CS)
+  2. Anushka Bansal — Co-Founder & Data Integrity Lead (B.Tech Bioinformatics)
+  3. Shashank Ray — Co-Founder & AI Systems Lead (B.Tech CSE-AI&ML)
+  4. Sameeksha Chandel — Co-Founder & Product/Operations Lead (B.Tech CSE-AI&ML)
+Key Highlights:
+  • 92% verification latency drop (60m ➔ <5m) & ₹0 student check cost
+  • Custom SHA-256 Proof-of-Work blockchain (zero gas fees)
+  • OpenCV 128D Face-Lock AI, PIL Tamper Map & Gemini 2.0 Flash OCR
+  • B2B Campus SaaS Model: ₹1.5L/year + ₹25 pay-per-verify corporate API`,
+
+      team: `👥 Team CYPHER-X Rosters (RIDEHACK'26 & SIH 2026):
+
+🏆 RIDEHACK'26 Founding Team (Grand Finals @ JIIT Noida • Team ID: 10):
+  1. A. Praneeth Sai (B.Tech CSE-Cybersecurity) — Founder & Sole Backend / Protocol Architect (100% Backend & Consensus, PoW Engine, PBKDF2 & OpenCV)
+  2. Anushka Bansal (B.Tech Bioinformatics) — Co-Founder & Data Integrity / Research Lead (Data Heuristics, Forensic Integrity, Dataset Modeling)
+  3. Shashank Ray (B.Tech CSE-AI&ML) — Co-Founder & AI Model Lead (Gemini 2.0 Flash OCR Extraction, B2B SaaS Commercials)
+  4. Sameeksha Chandel (B.Tech CSE-AI&ML) — Co-Founder & Product / Operations Lead (NEP 2020 Compliance, Student UX, Incubation Pitch)
+
+🎖️ Smart India Hackathon 2026 Squad (PS: SIH26125 • Team CYPHER-X):
+  1. A. Praneeth Sai (B.Tech CSE-Cybersecurity) — Team Leader & Sole Backend / Core Architect (100% Backend, PoW Blockchain Core, Web3.js & Polygon)
+  2. Jai Chauhan (B.Tech CSE-Cybersecurity) — Systems & Network Deployment Lead (IPFS File Pinning, Campus Infrastructure, Socket Listeners)
+  3. Jyoti Rana (B.Tech CSE) — Regulatory Compliance & Research Lead (UGC Regulatory Reports, FIPS & RFC Benchmarks, Registrar Workflows)
+  4. Gauri (B.Tech Biotechnology) — Frontend & UX Architecture Lead (Student Wallet UI, Dynamic 60s QR Scanner, Mobile Flows)
+  5. Sparsh (B.Tech CSE) — Verification Protocols & Data Specs Lead (Data Schema Mapping, Blockcerts Schemas, Certificate Formats)
+  6. Akshit Thakur (B.Tech CSE-AI&DS) — QA & Presentation Workflow Lead (Stress & Load Testing 10k Records, Edge Invalidation, Demo Execution)`,
+
+      video: `Opening SIH YouTube Video: <a href="https://youtu.be/Uu-bOJTZrFY" target="_blank" class="text-red-400 underline">https://youtu.be/Uu-bOJTZrFY</a>`,
+      github: `Opening GitHub profile: <a href="https://github.com/praneethsai050-cmd" target="_blank" class="text-cyan-400 underline">github.com/praneethsai050-cmd</a>`,
+      linkedin: `Opening LinkedIn profile: <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" class="text-cyan-400 underline">linkedin.com/in/a-praneeth-sai-089023289</a>`,
+      contact: `Direct Email Transmission available via the Contact section below, or connect directly on LinkedIn!`,
+    };
+
+    function terminalClear() {
+      terminalBody.innerHTML = `<div>Terminal buffer cleared. Type <span class="text-cyan-400">help</span> for available commands.</div>`;
+    }
+
+    terminalInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const cmd = terminalInput.value.trim().toLowerCase();
+        terminalInput.value = "";
+
+        if (!cmd) return;
+
+        // Print user command
+        const userLine = document.createElement("div");
+        userLine.innerHTML = `<span class="text-emerald-400 font-bold">visitor@juit:~$</span> <span>${cmd}</span>`;
+        terminalBody.appendChild(userLine);
+
+        if (cmd === "clear") {
+          terminalClear();
+        } else if (terminalCommands[cmd]) {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-emerald-500/40";
+          respLine.innerHTML = terminalCommands[cmd];
+          terminalBody.appendChild(respLine);
+
+          if (cmd === "sih" || cmd === "ridehack") {
+            switchSection('sih');
+          } else if (cmd === "ppt" || cmd === "deck") {
+            switchSection('sih');
+            setStudioView('slides');
+          } else if (cmd === "pdf") {
+            switchSection('sih');
+            setStudioView('pdf');
+          } else if (cmd === "video") {
+            switchSection('sih');
+            setStudioView('video');
+          } else if (cmd === "team") {
+            switchSection('sih');
+            setStudioView('team');
+          } else if (cmd === "projects") {
+            switchSection('projects');
+          } else if (cmd === "skills") {
+            switchSection('skills');
+          } else if (cmd === "contact") {
+            switchSection('contact');
+          }
+        } else {
+          const errLine = document.createElement("div");
+          errLine.className = "text-rose-400 text-xs";
+          errLine.innerHTML = `Command not recognized: '${cmd}'. Type <span class="text-cyan-300 font-bold">help</span> for a list of valid commands.`;
+          terminalBody.appendChild(errLine);
+        }
+
+        // Auto-scroll to bottom
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }
+    });
+
+    // Contact form handling
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("contact-name").value;
+      const email = document.getElementById("contact-email").value;
+      const subject = document.getElementById("contact-subject").value || "Portfolio Connection";
+      const message = document.getElementById("contact-message").value;
+
+      const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
+      window.location.href = mailtoLink;
+
+      const successBox = document.getElementById("contact-success");
+      successBox.classList.remove("hidden");
+    }
+  </script>
+
+  <!-- ==================== FULLSCREEN SLIDE MODAL ==================== -->
+  <div id="slide-modal" class="hidden fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-8">
+    <div class="w-full max-w-6xl flex items-center justify-between pb-3 text-xs font-mono text-slate-400">
+      <span id="slide-modal-caption" class="text-emerald-400 font-semibold truncate max-w-md"></span>
+      <div class="flex items-center gap-2">
+        <button onclick="prevSlide(); openSlideModal();" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:text-white transition flex items-center gap-1">
+          <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i> Prev
+        </button>
+        <button onclick="nextSlide(); openSlideModal();" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 hover:text-white transition flex items-center gap-1">
+          Next <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        </button>
+        <button onclick="closeSlideModal()" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition flex items-center gap-1">
+          <i data-lucide="x" class="w-3.5 h-3.5"></i> Close (Esc)
+        </button>
+      </div>
+    </div>
+    <div class="relative w-full max-w-6xl aspect-video rounded-2xl overflow-hidden bg-black border border-slate-800 shadow-2xl flex items-center justify-center">
+      <img id="slide-modal-img" src="" alt="Slide Fullscreen" class="w-full h-full object-contain" />
+    </div>
+  </div>
+</body>
+</html>
