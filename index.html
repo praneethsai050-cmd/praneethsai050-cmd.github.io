@@ -115,12 +115,35 @@
       display: none !important;
     }
 
-    /* Active Tab Glow */
-    .tab-active {
-      background: rgba(16, 185, 129, 0.15) !important;
-      color: #34d399 !important;
-      border-color: rgba(52, 211, 153, 0.4) !important;
-      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.3) !important;
+    /* Fluid Responsive Helpers */
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      overflow-x: hidden;
+      word-break: break-word;
+    }
+    img, video, iframe {
+      max-width: 100%;
+      height: auto;
+    }
+    /* Smooth horizontal scrolling for tabs */
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @media (max-width: 640px) {
+      .hud-dock-mobile {
+        bottom: 12px !important;
+        padding: 6px 10px !important;
+        gap: 6px !important;
+      }
+      .hud-dock-mobile button {
+        padding: 6px !important;
+      }
     }
   </style>
 </head>
@@ -1457,7 +1480,7 @@
   </main>
 
   <!-- ==================== FLOATING HUD MINI-DOCK (QUICK NAVIGATOR) ==================== -->
-  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 px-3 py-2 rounded-2xl bg-[#0a0f1d]/90 backdrop-blur-xl border border-slate-800/80 shadow-2xl flex items-center gap-2 font-mono text-xs">
+  <div class="hud-dock-mobile fixed bottom-6 left-1/2 -translate-x-1/2 z-40 px-3 py-2 rounded-2xl bg-[#0a0f1d]/90 backdrop-blur-xl border border-slate-800/80 shadow-2xl flex items-center gap-2 font-mono text-xs">
     <button onclick="switchSection('overview')" title="Overview" class="hud-btn p-2 rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-slate-800/60 transition">
       <i data-lucide="sparkles" class="w-4 h-4"></i>
     </button>
