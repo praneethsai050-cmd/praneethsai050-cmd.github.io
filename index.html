@@ -1434,58 +1434,218 @@
     <!-- ==================== SECTION 6: CONTACT & TRANSMISSION ==================== -->
     <div id="section-contact" class="view-section space-y-8">
       
-      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
-        <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
-        <div>
-          <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Initiate Transmission</h2>
-          <p class="text-xs text-slate-400 font-mono mt-0.5">Direct Message & Collaborations</p>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 flex-wrap gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Initiate Transmission</h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">Direct Communication Hub • High-Priority Ingestion</p>
+          </div>
         </div>
+
+        <span class="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Response SLA: &lt; 24h</span>
+        </span>
       </div>
 
-      <div class="glass-card rounded-2xl p-8 max-w-3xl mx-auto border border-slate-800">
-        <div class="text-center space-y-2 mb-8">
-          <h3 class="text-2xl font-bold text-white">Let's Connect</h3>
-          <p class="text-sm text-slate-400">
-            Have a project idea, open-source opportunity, or research collaboration? Reach out below.
-          </p>
-        </div>
+      <!-- Interactive Multi-Channel Transmission Hub -->
+      <div class="max-w-4xl mx-auto space-y-6">
 
-        <form id="contact-form" class="space-y-4" onsubmit="handleContactSubmit(event)">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-mono text-slate-400 mb-1">Your Name</label>
-              <input type="text" id="contact-name" required placeholder="John Doe" 
-                     class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
-            </div>
-            <div>
-              <label class="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
-              <input type="email" id="contact-email" required placeholder="john@example.com" 
-                     class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-mono text-slate-400 mb-1">Subject / Domain</label>
-            <input type="text" id="contact-subject" placeholder="Project Collaboration / Security Research" 
-                   class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans" />
-          </div>
-
-          <div>
-            <label class="block text-xs font-mono text-slate-400 mb-1">Message</label>
-            <textarea id="contact-message" rows="4" required placeholder="Write your message here..." 
-                      class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans"></textarea>
-          </div>
-
-          <button type="submit" class="w-full py-3 rounded-xl font-semibold bg-emerald-500 hover:bg-emerald-400 text-black transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 text-sm">
-            <i data-lucide="send" class="w-4 h-4"></i>
-            <span>Send Transmission</span>
+        <!-- Channel Selector Tabs -->
+        <div class="grid grid-cols-3 gap-2.5 p-1.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs font-mono">
+          <button onclick="setContactChannel('whatsapp')" id="btn-chan-whatsapp" 
+                  class="py-2.5 px-3 rounded-xl border border-emerald-500/40 bg-emerald-500/15 text-emerald-300 font-semibold transition flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>WhatsApp Direct</span>
           </button>
-        </form>
 
-        <div id="contact-success" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm text-center font-mono">
-          ✅ Thank you! Preparing direct mail dispatch.
+          <button onclick="setContactChannel('linkedin')" id="btn-chan-linkedin" 
+                  class="py-2.5 px-3 rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-2">
+            <i data-lucide="linkedin" class="w-4 h-4 text-cyan-400"></i>
+            <span>LinkedIn DM</span>
+          </button>
+
+          <button onclick="setContactChannel('email')" id="btn-chan-email" 
+                  class="py-2.5 px-3 rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-2">
+            <i data-lucide="mail" class="w-4 h-4 text-purple-400"></i>
+            <span>Email Dispatch</span>
+          </button>
         </div>
+
+        <!-- 1. WHATSAPP DIRECT CHAT PANEL (ACTIVE DEFAULT) -->
+        <div id="contact-panel-whatsapp" class="glass-card rounded-2xl p-6 sm:p-8 border-emerald-500/30 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                  <span>Direct WhatsApp Channel</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ONLINE</span>
+                </h3>
+                <p class="text-xs text-slate-400 font-mono mt-0.5">Instant messaging for quick queries, project discussions & hackathon connections</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <span class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300">
+                +91 87776 79256
+              </span>
+              <button onclick="copyToClipboard('+918777679256', 'Number copied!')" class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition" title="Copy Number">
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-mono text-slate-400 mb-1.5">Customize your opening message (Optional):</label>
+              <textarea id="wa-custom-msg" rows="3" 
+                        class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-emerald-500 transition text-sm font-sans"
+                        placeholder="Hi Praneeth, I saw your portfolio and Satyameva Aegis project on GitHub. I'd love to connect regarding..."></textarea>
+            </div>
+
+            <!-- Quick Template Chips -->
+            <div class="flex items-center gap-2 flex-wrap text-xs font-mono text-slate-400">
+              <span class="text-slate-500">Quick Templates:</span>
+              <button onclick="setWaTemplate('Hi Praneeth, I reviewed your Satyameva Aegis blockchain architecture and would like to discuss a project collaboration!')" 
+                      class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:text-emerald-300 transition">
+                🤝 Project Collab
+              </button>
+              <button onclick="setWaTemplate('Hi Praneeth, congratulations on qualifying for RIDEHACK\'26 Finals at JIIT Noida! Wanted to connect.')" 
+                      class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:text-emerald-300 transition">
+                🏆 Hackathon Chat
+              </button>
+              <button onclick="setWaTemplate('Hi Praneeth, I found your portfolio via LinkedIn. Are you open for internships or technical projects?')" 
+                      class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:text-emerald-300 transition">
+                💼 Internship / Work
+              </button>
+            </div>
+
+            <button onclick="launchWhatsApp()" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-400 text-black transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 text-sm font-mono">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+              <span>Launch WhatsApp Chat (+91 87776 79256)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. LINKEDIN DM PANEL -->
+        <div id="contact-panel-linkedin" class="hidden glass-card rounded-2xl p-6 sm:p-8 border-cyan-500/30 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                <i data-lucide="linkedin" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white">Professional InMail & Direct Message</h3>
+                <p class="text-xs text-slate-400 font-mono mt-0.5">Best for formal recommendations, recruitment, and institutional networking</p>
+              </div>
+            </div>
+
+            <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" 
+               class="px-4 py-2 rounded-xl bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25 transition text-xs font-mono flex items-center gap-1.5 shrink-0">
+              <span>View Profile</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+            <h4 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i> Why connect on LinkedIn?
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              I actively publish technical post-mortems of our custom Proof-of-Work blockchain experiments, national hackathon preparations, and first-year cybersecurity learnings at JUIT Solan.
+            </p>
+            <div class="pt-2 flex flex-wrap gap-2 text-[11px] font-mono">
+              <span class="px-2.5 py-1 rounded bg-black/60 border border-slate-800 text-cyan-300">1st-Year CSE (Cybersecurity)</span>
+              <span class="px-2.5 py-1 rounded bg-black/60 border border-slate-800 text-cyan-300">JUIT Solan</span>
+              <span class="px-2.5 py-1 rounded bg-black/60 border border-slate-800 text-cyan-300">Team CYPHER-X Lead</span>
+            </div>
+          </div>
+
+          <a href="https://www.linkedin.com/in/a-praneeth-sai-089023289/" target="_blank" 
+             class="w-full py-3.5 rounded-xl font-bold bg-cyan-500 hover:bg-cyan-400 text-black transition-all shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-sm font-mono">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Open LinkedIn Conversation</span>
+          </a>
+        </div>
+
+        <!-- 3. EMAIL DISPATCH PANEL -->
+        <div id="contact-panel-email" class="hidden glass-card rounded-2xl p-6 sm:p-8 border-purple-500/30 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shrink-0">
+                <i data-lucide="mail" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white">Direct Academic & Personal Email</h3>
+                <p class="text-xs text-slate-400 font-mono mt-0.5">Send structured emails directly to my university or personal inbox</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <button onclick="copyToClipboard('261034004@juitsolan.in', 'University Email Copied!')" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Copy JUIT Email">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> JUIT Mail
+              </button>
+              <button onclick="copyToClipboard('praneethsai050@gmail.com', 'Personal Email Copied!')" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition flex items-center gap-1.5" title="Copy Personal Email">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Gmail
+              </button>
+            </div>
+          </div>
+
+          <form id="contact-form" class="space-y-4" onsubmit="handleContactSubmit(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono text-slate-400 mb-1">Your Name</label>
+                <input type="text" id="contact-name" required placeholder="John Doe" 
+                       class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 transition text-sm font-sans" />
+              </div>
+              <div>
+                <label class="block text-xs font-mono text-slate-400 mb-1">Your Email</label>
+                <input type="email" id="contact-email" required placeholder="john@example.com" 
+                       class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 transition text-sm font-sans" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-slate-400 mb-1">Subject / Domain</label>
+              <input type="text" id="contact-subject" placeholder="Project Collaboration / Security Research" 
+                     class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 transition text-sm font-sans" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-slate-400 mb-1">Message</label>
+              <textarea id="contact-message" rows="4" required placeholder="Write your message here..." 
+                        class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-purple-500 transition text-sm font-sans"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 rounded-xl font-bold bg-purple-500 hover:bg-purple-400 text-white transition-all shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2 text-sm font-mono">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Compose & Send Transmission</span>
+            </button>
+          </form>
+
+          <div id="contact-success" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm text-center font-mono">
+            ✅ Preparing your default email client with pre-filled transmission!
+          </div>
+        </div>
+
       </div>
+
+      <!-- Toast Notification Container for Clipboard Copies -->
+      <div id="toast-notify" class="fixed top-20 right-6 z-50 transform translate-y-[-100px] opacity-0 transition-all duration-300 pointer-events-none px-4 py-2.5 rounded-xl bg-emerald-500 text-black font-mono text-xs font-bold shadow-2xl flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-4 h-4"></i>
+        <span id="toast-text">Copied to clipboard!</span>
+      </div>
+
     </div>
 
   </main>
@@ -2169,7 +2329,93 @@ Key Highlights:
       }
     });
 
-    // Contact form handling
+    // Contact Hub Interactions (WhatsApp, LinkedIn, Email)
+    function setContactChannel(channel) {
+      const channels = ['whatsapp', 'linkedin', 'email'];
+      channels.forEach(ch => {
+        const panel = document.getElementById(`contact-panel-${ch}`);
+        const btn = document.getElementById(`btn-chan-${ch}`);
+        if (panel) {
+          if (ch === channel) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (ch === channel) {
+            btn.className = 'py-2.5 px-3 rounded-xl bg-slate-800 text-white border border-slate-700 shadow-sm transition flex items-center justify-center gap-2';
+          } else {
+            btn.className = 'py-2.5 px-3 rounded-xl border border-transparent text-slate-400 hover:text-white transition flex items-center justify-center gap-2';
+          }
+        }
+      });
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function setWaTemplate(msg) {
+      const waInput = document.getElementById('wa-custom-msg');
+      if (waInput) {
+        waInput.value = msg;
+        waInput.focus();
+      }
+    }
+
+    function launchWhatsApp() {
+      const waInput = document.getElementById('wa-custom-msg');
+      const text = (waInput && waInput.value.trim()) 
+        ? waInput.value.trim() 
+        : "Hi Praneeth, I reviewed your portfolio and Satyameva Aegis project on GitHub. I'd love to connect!";
+      const phone = "918777679256";
+      const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    let toastTimer = null;
+    function copyToClipboard(text, alertMsg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {
+          fallbackCopyText(text);
+        });
+      } else {
+        fallbackCopyText(text);
+      }
+      showToast(alertMsg || 'Copied to clipboard!');
+    }
+
+    function fallbackCopyText(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {}
+      document.body.removeChild(ta);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast-notify');
+      const toastText = document.getElementById('toast-text');
+      if (!toast) return;
+
+      if (toastText) toastText.textContent = message;
+      toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-[-100px]', 'opacity-0');
+      }, 2500);
+    }
+
+    // Contact form handling (Academic & Personal Email)
     function handleContactSubmit(e) {
       e.preventDefault();
       const name = document.getElementById("contact-name").value;
@@ -2177,11 +2423,12 @@ Key Highlights:
       const subject = document.getElementById("contact-subject").value || "Portfolio Connection";
       const message = document.getElementById("contact-message").value;
 
-      const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
+      const recipients = "praneethsai050@gmail.com,261034004@juitsolan.in";
+      const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
       window.location.href = mailtoLink;
 
       const successBox = document.getElementById("contact-success");
-      successBox.classList.remove("hidden");
+      if (successBox) successBox.classList.remove("hidden");
     }
   </script>
 
