@@ -61,6 +61,8 @@
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
     /* Custom Scrollbar */
@@ -105,6 +107,15 @@
     .terminal-scroll::-webkit-scrollbar-thumb {
       background: #334155;
       border-radius: 3px;
+    }
+
+    /* Active Workspace Tab Styling */
+    .workspace-tab.tab-active {
+      background: rgba(16, 185, 129, 0.15) !important;
+      border-color: rgba(16, 185, 129, 0.5) !important;
+      color: #34d399 !important;
+      font-weight: 600;
+      box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.3);
     }
 
     /* Focus Mode Tab Hide/Show */
@@ -340,6 +351,9 @@
         <!-- Right Visual Widget: Cyber ID Card -->
         <div class="w-full lg:w-[420px] flex justify-center">
           <div class="w-full max-w-sm glass-card rounded-2xl p-6 relative border border-slate-800 shadow-2xl">
+            <div id="ctf-unlocked-badge" class="hidden absolute -top-3 -left-3 px-3 py-1 bg-gradient-to-r from-amber-400 via-rose-500 to-purple-500 text-black font-extrabold rounded-full text-[10px] font-mono uppercase tracking-widest shadow-xl shadow-amber-500/40 animate-pulse flex items-center gap-1 z-20">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i> CTF Master Unlocked
+            </div>
             <div class="absolute -top-3 -right-3 px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-[10px] font-mono text-emerald-300 uppercase tracking-widest">
               Verified Identity
             </div>
@@ -1406,6 +1420,208 @@
 
       </div>
 
+      <!-- Interactive Security Lab Workbench -->
+      <div class="glass-card rounded-2xl p-6 border border-cyan-500/30 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+              <i data-lucide="flask-conical" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight">Interactive Security Lab Workbench</h3>
+                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">CLIENT-SIDE WEB CRYPTO API</span>
+              </div>
+              <p class="text-xs text-slate-400 font-mono mt-0.5">Live cryptographic hashing, entropy calculus & zero-knowledge architecture</p>
+            </div>
+          </div>
+
+          <!-- Lab Tab Switcher -->
+          <div class="flex items-center gap-2 p-1 bg-slate-950/80 rounded-xl border border-slate-800 text-xs font-mono">
+            <button onclick="setLabTab('hash')" id="btn-lab-hash" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold transition flex items-center gap-1.5">
+              <i data-lucide="binary" class="w-3.5 h-3.5"></i> Hash Lab
+            </button>
+            <button onclick="setLabTab('entropy')" id="btn-lab-entropy" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white border border-transparent transition flex items-center gap-1.5">
+              <i data-lucide="gauge" class="w-3.5 h-3.5"></i> Entropy Lab
+            </button>
+            <button onclick="setLabTab('radar')" id="btn-lab-radar" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white border border-transparent transition flex items-center gap-1.5">
+              <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Standards Radar
+            </button>
+          </div>
+        </div>
+
+        <!-- LAB PANEL 1: Live Cryptographic Hash Generator -->
+        <div id="lab-panel-hash" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+            <div class="md:col-span-8 space-y-2">
+              <label class="block text-xs font-mono text-slate-400">Payload / Input Text</label>
+              <input id="lab-hash-input" type="text" value="Satyameva Aegis SIH 2026" oninput="calculateLabHash()" 
+                     placeholder="Type any message to hash in real-time..."
+                     class="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 placeholder:text-slate-600 transition" />
+            </div>
+            <div class="md:col-span-4 space-y-2">
+              <label class="block text-xs font-mono text-slate-400">Cryptographic Algorithm</label>
+              <select id="lab-hash-algo" onchange="calculateLabHash()" 
+                      class="w-full px-3 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700/80 text-cyan-300 font-mono text-sm focus:outline-none focus:border-cyan-400 cursor-pointer">
+                <option value="SHA-256">SHA-256 (NIST FIPS 180-4)</option>
+                <option value="SHA-512">SHA-512 (512-bit High Security)</option>
+                <option value="HMAC-SHA256">HMAC-SHA256 (Keyed Message Integrity)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="lab-hmac-key-container" class="hidden space-y-1.5">
+            <label class="block text-xs font-mono text-amber-400 flex items-center gap-1">
+              <i data-lucide="key" class="w-3.5 h-3.5"></i> HMAC Secret Key (Salt)
+            </label>
+            <input id="lab-hash-key" type="text" value="aegis-secret-key-2026" oninput="calculateLabHash()" 
+                   placeholder="Enter HMAC Secret Key..."
+                   class="w-full px-4 py-2 rounded-xl bg-slate-950/80 border border-amber-500/40 text-amber-200 font-mono text-xs focus:outline-none focus:border-amber-400" />
+          </div>
+
+          <!-- Hash Result Box -->
+          <div class="p-4 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2.5">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <div class="flex items-center gap-2 text-slate-400">
+                <span>DIGEST OUTPUT:</span>
+                <span id="lab-hash-bits" class="text-cyan-400 font-bold">256-BIT (64 HEX CHARACTERS)</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span id="lab-hash-time" class="text-slate-500 text-[11px]">&lt; 1 ms</span>
+                <button onclick="copyLabHash()" id="lab-hash-copy-btn" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition flex items-center gap-1 text-[11px]">
+                  <i data-lucide="copy" class="w-3 h-3"></i> <span>Copy</span>
+                </button>
+              </div>
+            </div>
+            <div id="lab-hash-output" class="font-mono text-xs sm:text-sm text-emerald-400 break-all select-all p-3 rounded-lg bg-black/60 border border-slate-800/80 tracking-wider">
+              Calculating...
+            </div>
+          </div>
+        </div>
+
+        <!-- LAB PANEL 2: Password Entropy & Vulnerability Gauge -->
+        <div id="lab-panel-entropy" class="hidden space-y-5">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+            <div class="lg:col-span-7 space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-mono text-slate-400">Password / Passphrase String</label>
+                  <button onclick="rollLabPassword()" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition">
+                    <i data-lucide="shuffle" class="w-3.5 h-3.5"></i> Roll Secure Passphrase
+                  </button>
+                </div>
+                <div class="relative">
+                  <input id="lab-entropy-input" type="text" value="Cyph3r_X@JUIT#2026!" oninput="analyzeLabEntropy()" 
+                         placeholder="Type a password to test resistance..."
+                         class="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-700/80 text-white font-mono text-sm focus:outline-none focus:border-emerald-400" />
+                </div>
+              </div>
+
+              <!-- Character Set Matrix Checks -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+                <div id="rule-length" class="p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-500 flex items-center gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> 12+ Chars
+                </div>
+                <div id="rule-upper" class="p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-500 flex items-center gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Uppercase [A-Z]
+                </div>
+                <div id="rule-lower" class="p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-500 flex items-center gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Lowercase [a-z]
+                </div>
+                <div id="rule-symbols" class="p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-500 flex items-center gap-1.5">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> Symbols & Nums
+                </div>
+              </div>
+            </div>
+
+            <!-- Gauge Metrics & Crack Time Display -->
+            <div class="lg:col-span-5 p-4 rounded-xl bg-slate-950/90 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-slate-400">SHANNON ENTROPY:</span>
+                <span id="lab-entropy-bits" class="text-emerald-400 font-bold text-sm">94.6 bits</span>
+              </div>
+
+              <!-- Visual Progress Bar -->
+              <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                <div id="lab-entropy-bar" class="h-full rounded-full bg-emerald-500 transition-all duration-300" style="width: 85%;"></div>
+              </div>
+
+              <div class="flex items-center justify-between text-xs font-mono">
+                <span class="text-slate-400">STRENGTH GRADE:</span>
+                <span id="lab-entropy-grade" class="px-2 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">MILITARY GRADE</span>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800/80 space-y-1">
+                <div class="text-[11px] font-mono text-slate-400">BRUTE-FORCE RESISTANCE (10¹¹ H/s cluster):</div>
+                <div id="lab-entropy-crack-time" class="text-sm font-mono font-bold text-cyan-300">
+                  ~ 2.8 Trillion Centuries
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAB PANEL 3: Cryptographic Standards & Architecture Radar -->
+        <div id="lab-panel-radar" class="hidden space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-emerald-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5">
+                  <i data-lucide="cpu" class="w-4 h-4"></i> PoW Blockchain
+                </span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400">0 GAS FEE</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Custom SHA-256 Proof-of-Work blockchain engine in Satyameva Aegis. Difficulty targeting prevents history rewrite without transaction fees.
+              </p>
+              <div class="text-[11px] font-mono text-slate-500 pt-1">Target: 0000... hash prefix</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-cyan-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-cyan-400 flex items-center gap-1.5">
+                  <i data-lucide="scan-face" class="w-4 h-4"></i> OpenCV 128D Face
+                </span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400">BIOMETRIC</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                128-dimensional facial landmark vector hashing. Cryptographically anchors degree photos so identity cannot be forged or swapped.
+              </p>
+              <div class="text-[11px] font-mono text-slate-500 pt-1">Cosine Sim &gt; 0.94 Threshold</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-purple-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-purple-400 flex items-center gap-1.5">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i> PBKDF2 Vault
+                </span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400">100K ITER</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Key derivation function running 100,000 SHA-256 iterations with cryptographically secure random salts. Renders rainbow tables obsolete.
+              </p>
+              <div class="text-[11px] font-mono text-slate-500 pt-1">NIST SP 800-132 Compliant</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950/80 border border-amber-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono font-bold text-amber-400 flex items-center gap-1.5">
+                  <i data-lucide="radio" class="w-4 h-4"></i> WebRTC E2EE
+                </span>
+                <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400">P2P MESH</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Engineered in GhostChat: peer-to-peer data channels with ephemeral key handshakes. Zero server-side message or IP retention.
+              </p>
+              <div class="text-[11px] font-mono text-slate-500 pt-1">DTLS-SRTP 256-bit AES-GCM</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
       <!-- Honors & Achievements -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
 
@@ -1485,8 +1701,8 @@
         <div class="flex items-center gap-3">
           <div class="w-2 h-8 bg-emerald-500 rounded-full"></div>
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Interactive Cyber Terminal</h2>
-            <p class="text-xs text-slate-400 font-mono mt-0.5">Command-line workspace interface</p>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Interactive Cyber Terminal & CTF</h2>
+            <p class="text-xs text-slate-400 font-mono mt-0.5">Command-line workspace interface & Operation Aegis Shield CTF</p>
           </div>
         </div>
 
@@ -1495,33 +1711,80 @@
         </button>
       </div>
 
-      <div class="w-full bg-[#0a0f1d] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm">
+      <!-- CTF Mission Control Bar -->
+      <div class="glass-card rounded-2xl p-4 sm:p-5 border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <i data-lucide="crosshair" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-sm font-bold text-white tracking-tight">OPERATION AEGIS SHIELD</span>
+              <span id="ctf-stage-pill" class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">STAGE 1/3: CRYPTO INTERCEPT</span>
+            </div>
+            <p id="ctf-mission-desc" class="text-xs text-slate-400 font-mono mt-0.5">Decrypt intercepted packet payload using <span class="text-cyan-400 font-bold">decode &lt;base64&gt;</span></p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 font-mono text-xs flex-wrap">
+          <div class="px-3 py-1.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center gap-2">
+            <span class="text-slate-400">SCORE:</span>
+            <span id="ctf-score-display" class="text-emerald-400 font-bold text-sm">0</span>
+            <span class="text-slate-500">/ 300 PTS</span>
+          </div>
+
+          <button onclick="terminalCtfHint()" id="ctf-btn-hint" class="px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition flex items-center gap-1.5">
+            <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i> Hint
+          </button>
+
+          <button onclick="toggleTerminalSound()" id="ctf-btn-sound" class="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center gap-1.5" title="Toggle Terminal Audio Synthesizer">
+            <i data-lucide="volume-2" class="w-3.5 h-3.5" id="ctf-sound-icon"></i> <span id="ctf-sound-text">Audio: ON</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="terminal-window" class="w-full bg-[#0a0f1d] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm transition-colors duration-300">
         <!-- Terminal Header -->
-        <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <div id="terminal-header" class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
             <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
             <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-            <span class="text-xs text-slate-400 ml-2">praneeth@juit-workstation:~</span>
+            <span id="terminal-host-tag" class="text-xs text-slate-400 ml-2">praneeth@juit-workstation:~</span>
           </div>
-          <div class="text-[11px] text-slate-500 hidden sm:block">bash v5.2-release (type 'help')</div>
+          <div class="text-[11px] text-slate-500 hidden sm:block">bash v5.2-aegis (type 'help' or 'ctf')</div>
         </div>
 
         <!-- Terminal Body -->
         <div id="terminal-body" class="p-5 h-80 overflow-y-auto space-y-3 terminal-scroll text-slate-300 text-xs sm:text-sm">
           <div>
-            <span class="text-emerald-400">Welcome to Praneeth's Interactive Terminal Shell!</span><br/>
-            Type <span class="text-cyan-400 font-bold">help</span> to view available commands.
+            <span class="text-emerald-400 font-bold">Welcome to Praneeth's Interactive Cyber Terminal & CTF Shell!</span><br/>
+            Type <span class="text-cyan-400 font-bold">help</span> to view commands, or <span class="text-emerald-400 font-bold">ctf</span> to begin Operation Aegis Shield.
           </div>
         </div>
 
         <!-- Terminal Input -->
-        <div class="bg-slate-950/70 px-5 py-3 border-t border-slate-800 flex items-center gap-2">
-          <span class="text-emerald-400 font-bold">visitor@juit:~$</span>
+        <div id="terminal-input-bar" class="bg-slate-950/70 px-5 py-3 border-t border-slate-800 flex items-center gap-2">
+          <span id="terminal-prompt" class="text-emerald-400 font-bold">visitor@juit:~$</span>
           <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" 
                  class="flex-1 bg-transparent text-slate-100 focus:outline-none font-mono text-sm caret-emerald-400" 
-                 placeholder="Type 'help' and press Enter..." />
+                 placeholder="Type 'ctf' or 'help' and press Enter..." />
         </div>
+      </div>
+
+      <!-- Quick Action Command Chips -->
+      <div class="flex flex-wrap items-center gap-2 text-xs font-mono pt-1">
+        <span class="text-slate-500 text-[11px] flex items-center gap-1">
+          <i data-lucide="terminal" class="w-3 h-3"></i> Quick Chips:
+        </span>
+        <button onclick="runTerminalChip('help')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition">help</button>
+        <button onclick="runTerminalChip('ctf')" class="px-2.5 py-1 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-500/30 text-emerald-300 transition">ctf</button>
+        <button onclick="runTerminalChip('hash satyameva')" class="px-2.5 py-1 rounded-lg bg-cyan-950/40 hover:bg-cyan-900/60 border border-cyan-500/30 text-cyan-300 transition">hash satyameva</button>
+        <button onclick="runTerminalChip('entropy P@ssw0rd2026!')" class="px-2.5 py-1 rounded-lg bg-purple-950/40 hover:bg-purple-900/60 border border-purple-500/30 text-purple-300 transition">entropy &lt;pwd&gt;</button>
+        <button onclick="runTerminalChip('mine 3')" class="px-2.5 py-1 rounded-lg bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/30 text-amber-300 transition">mine 3</button>
+        <button onclick="runTerminalChip('scan')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-cyan-300 hover:text-cyan-200 transition">scan</button>
+        <button onclick="runTerminalChip('theme')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition">theme</button>
+        <button onclick="runTerminalChip('clear')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white transition">clear</button>
       </div>
     </div>
 
@@ -2235,6 +2498,9 @@
       renderSlide(0);
       // Initialize in Workspace Mode
       switchSection('overview');
+      // Initialize Security Lab Workbench
+      calculateLabHash();
+      analyzeLabEntropy();
     });
 
     // Matrix Rain Canvas Animation (Subtle Background)
@@ -2274,33 +2540,480 @@
     }
     setInterval(drawMatrix, 50);
 
-    // Interactive Terminal Implementation
+    // ==================== SECURITY ARSENAL: LAB WORKBENCH LOGIC ====================
+    function setLabTab(tab) {
+      const tabs = ['hash', 'entropy', 'radar'];
+      tabs.forEach(t => {
+        const panel = document.getElementById(`lab-panel-${t}`);
+        const btn = document.getElementById(`btn-lab-${t}`);
+        if (panel) {
+          if (t === tab) {
+            panel.classList.remove('hidden');
+          } else {
+            panel.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (t === tab) {
+            btn.className = 'px-3 py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold transition flex items-center gap-1.5';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-slate-400 hover:text-white border border-transparent transition flex items-center gap-1.5';
+          }
+        }
+      });
+      if (window.lucide) lucide.createIcons();
+    }
+
+    async function calculateLabHash() {
+      const inputEl = document.getElementById("lab-hash-input");
+      const algoEl = document.getElementById("lab-hash-algo");
+      const outputEl = document.getElementById("lab-hash-output");
+      const bitsEl = document.getElementById("lab-hash-bits");
+      const timeEl = document.getElementById("lab-hash-time");
+      const keyContainer = document.getElementById("lab-hmac-key-container");
+      const keyEl = document.getElementById("lab-hash-key");
+
+      if (!inputEl || !outputEl) return;
+      const text = inputEl.value;
+      const algo = algoEl ? algoEl.value : "SHA-256";
+
+      if (algo === "HMAC-SHA256") {
+        if (keyContainer) keyContainer.classList.remove("hidden");
+      } else {
+        if (keyContainer) keyContainer.classList.add("hidden");
+      }
+
+      const t0 = performance.now();
+      try {
+        const enc = new TextEncoder();
+        let hexDigest = "";
+
+        if (algo === "HMAC-SHA256") {
+          const secret = (keyEl && keyEl.value) ? keyEl.value : "aegis-secret-key-2026";
+          const cryptoKey = await window.crypto.subtle.importKey(
+            "raw", enc.encode(secret), { name: "HMAC", hash: { name: "SHA-256" } }, false, ["sign"]
+          );
+          const signature = await window.crypto.subtle.sign("HMAC", cryptoKey, enc.encode(text));
+          hexDigest = Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
+          if (bitsEl) bitsEl.textContent = "256-BIT HMAC-SHA256 DIGEST";
+        } else {
+          const hashBuffer = await window.crypto.subtle.digest(algo, enc.encode(text));
+          hexDigest = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+          if (bitsEl) {
+            bitsEl.textContent = algo === "SHA-512" ? "512-BIT (128 HEX CHARACTERS)" : "256-BIT (64 HEX CHARACTERS)";
+          }
+        }
+        const t1 = performance.now();
+        outputEl.textContent = hexDigest;
+        if (timeEl) timeEl.textContent = `${Math.max(0.01, t1 - t0).toFixed(2)} ms`;
+      } catch (err) {
+        outputEl.textContent = "Hash generation error: " + err.message;
+      }
+    }
+
+    function copyLabHash() {
+      const outputEl = document.getElementById("lab-hash-output");
+      const btn = document.getElementById("lab-hash-copy-btn");
+      if (!outputEl) return;
+      navigator.clipboard.writeText(outputEl.textContent.trim()).then(() => {
+        if (btn) {
+          btn.innerHTML = `<i data-lucide="check" class="w-3 h-3 text-emerald-400"></i> <span class="text-emerald-400">Copied!</span>`;
+          if (window.lucide) lucide.createIcons();
+          setTimeout(() => {
+            btn.innerHTML = `<i data-lucide="copy" class="w-3 h-3"></i> <span>Copy</span>`;
+            if (window.lucide) lucide.createIcons();
+          }, 2000);
+        }
+      });
+    }
+
+    function analyzeLabEntropy() {
+      const inputEl = document.getElementById("lab-entropy-input");
+      const bitsEl = document.getElementById("lab-entropy-bits");
+      const barEl = document.getElementById("lab-entropy-bar");
+      const gradeEl = document.getElementById("lab-entropy-grade");
+      const crackEl = document.getElementById("lab-entropy-crack-time");
+      if (!inputEl) return;
+      const pwd = inputEl.value;
+
+      const hasLower = /[a-z]/.test(pwd);
+      const hasUpper = /[A-Z]/.test(pwd);
+      const hasDigits = /[0-9]/.test(pwd);
+      const hasSymbols = /[^a-zA-Z0-9]/.test(pwd);
+
+      const updateRule = (id, active) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (active) {
+          el.className = "p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center gap-1.5";
+        } else {
+          el.className = "p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-slate-500 flex items-center gap-1.5";
+        }
+      };
+      updateRule("rule-length", pwd.length >= 12);
+      updateRule("rule-upper", hasUpper);
+      updateRule("rule-lower", hasLower);
+      updateRule("rule-symbols", hasSymbols && hasDigits);
+
+      let poolSize = 0;
+      if (hasLower) poolSize += 26;
+      if (hasUpper) poolSize += 26;
+      if (hasDigits) poolSize += 10;
+      if (hasSymbols) poolSize += 33;
+      if (poolSize === 0) poolSize = 1;
+
+      const entropy = pwd.length > 0 ? (pwd.length * (Math.log2(poolSize))) : 0;
+      if (bitsEl) bitsEl.textContent = `${entropy.toFixed(1)} bits`;
+
+      const pct = Math.min(100, Math.max(5, (entropy / 128) * 100));
+      if (barEl) {
+        barEl.style.width = `${pct}%`;
+        if (entropy < 35) {
+          barEl.className = "h-full rounded-full bg-rose-500 transition-all duration-300";
+        } else if (entropy < 60) {
+          barEl.className = "h-full rounded-full bg-amber-500 transition-all duration-300";
+        } else if (entropy < 85) {
+          barEl.className = "h-full rounded-full bg-emerald-500 transition-all duration-300";
+        } else {
+          barEl.className = "h-full rounded-full bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400 transition-all duration-300";
+        }
+      }
+
+      const totalCombinations = Math.pow(poolSize, pwd.length);
+      const seconds = totalCombinations / 1e11;
+
+      let crackTimeStr = "Instant (< 1 ms)";
+      let gradeStr = "VERY WEAK";
+      let gradeClass = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+
+      if (entropy >= 90) {
+        gradeStr = "MILITARY GRADE";
+        gradeClass = "bg-purple-500/20 text-purple-300 border-purple-500/40";
+      } else if (entropy >= 70) {
+        gradeStr = "VERY STRONG";
+        gradeClass = "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
+      } else if (entropy >= 50) {
+        gradeStr = "MODERATE";
+        gradeClass = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+      } else {
+        gradeStr = "VULNERABLE";
+        gradeClass = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+      }
+
+      if (seconds < 0.001) {
+        crackTimeStr = "Instant (< 1 ms)";
+      } else if (seconds < 60) {
+        crackTimeStr = `~ ${Math.ceil(seconds)} seconds`;
+      } else if (seconds < 3600) {
+        crackTimeStr = `~ ${(seconds / 60).toFixed(1)} minutes`;
+      } else if (seconds < 86400) {
+        crackTimeStr = `~ ${(seconds / 3600).toFixed(1)} hours`;
+      } else if (seconds < 31536000) {
+        crackTimeStr = `~ ${(seconds / 86400).toFixed(0)} days`;
+      } else if (seconds < 31536000 * 1000) {
+        crackTimeStr = `~ ${(seconds / 31536000).toFixed(0)} years`;
+      } else if (seconds < 31536000 * 1e6) {
+        crackTimeStr = `~ ${(seconds / (31536000 * 1000)).toFixed(0)} Millennia`;
+      } else {
+        crackTimeStr = `~ ${(seconds / (31536000 * 1e9)).toFixed(1)} Billion Years`;
+      }
+
+      if (gradeEl) {
+        gradeEl.textContent = gradeStr;
+        gradeEl.className = `px-2 py-0.5 rounded font-bold border text-[11px] ${gradeClass}`;
+      }
+      if (crackEl) crackEl.textContent = crackTimeStr;
+    }
+
+    function rollLabPassword() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=";
+      let pass = "";
+      const randomArray = new Uint32Array(16);
+      window.crypto.getRandomValues(randomArray);
+      for (let i = 0; i < 16; i++) {
+        pass += chars[randomArray[i] % chars.length];
+      }
+      const inputEl = document.getElementById("lab-entropy-input");
+      if (inputEl) {
+        inputEl.value = pass;
+        analyzeLabEntropy();
+      }
+    }
+
+    // ==================== WEB AUDIO SYNTHESIZER ====================
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function playCyberBeep(type = 'blip') {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'blip') {
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(440, now + 0.06);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.06);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        } else if (type === 'success') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.08);
+          osc.frequency.setValueAtTime(783.99, now + 0.16);
+          osc.frequency.setValueAtTime(1046.50, now + 0.24);
+          gain.gain.setValueAtTime(0.09, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.45);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        } else if (type === 'error') {
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.setValueAtTime(140, now + 0.15);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.001, now + 0.18);
+          osc.start(now);
+          osc.stop(now + 0.18);
+        } else if (type === 'fanfare') {
+          const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+          notes.forEach((freq, idx) => {
+            const o = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            o.type = 'triangle';
+            o.frequency.value = freq;
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            const t = now + (idx * 0.1);
+            g.gain.setValueAtTime(0.08, t);
+            g.gain.linearRampToValueAtTime(0.001, t + 0.25);
+            o.start(t);
+            o.stop(t + 0.25);
+          });
+        }
+      } catch (e) {
+        // AudioContext fallback
+      }
+    }
+
+    function toggleTerminalSound() {
+      soundEnabled = !soundEnabled;
+      const textEl = document.getElementById("ctf-sound-text");
+      const iconEl = document.getElementById("ctf-sound-icon");
+      if (textEl) textEl.textContent = soundEnabled ? "Audio: ON" : "Audio: OFF";
+      if (iconEl) {
+        iconEl.setAttribute("data-lucide", soundEnabled ? "volume-2" : "volume-x");
+        if (window.lucide) lucide.createIcons();
+      }
+      playCyberBeep(soundEnabled ? 'blip' : 'error');
+    }
+
+    // ==================== MINI-CTF CHALLENGE ENGINE ====================
+    const ctfState = {
+      stage: 1,
+      score: 0,
+      maxScore: 300,
+      stage1Answer: "SAT_FLAG{CYBER_AEGIS_2026}",
+      stage2Hash: "ac4139d653f02e612e190a9f690320505c4e5617ec2d35b8827a75dd93b809a4",
+      stage2Answer: "satyameva",
+      stage3Prefix: "000",
+      stage3Block: "aegis-block-1:",
+      completed: false
+    };
+
+    function updateCtfUI() {
+      const stagePill = document.getElementById("ctf-stage-pill");
+      const scoreDisp = document.getElementById("ctf-score-display");
+      const descEl = document.getElementById("ctf-mission-desc");
+
+      if (scoreDisp) scoreDisp.textContent = ctfState.score;
+
+      if (ctfState.completed) {
+        if (stagePill) {
+          stagePill.className = "px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30";
+          stagePill.textContent = "MISSION COMPLETE: 300/300 PTS";
+        }
+        if (descEl) descEl.innerHTML = `All security protocols conquered. <span class="text-amber-400 font-bold">CTF Master Badge Unlocked!</span>`;
+        return;
+      }
+
+      if (ctfState.stage === 1) {
+        if (stagePill) {
+          stagePill.className = "px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+          stagePill.textContent = "STAGE 1/3: CRYPTO INTERCEPT";
+        }
+        if (descEl) descEl.innerHTML = `Decrypt intercepted packet payload using <span class="text-cyan-400 font-bold">decode &lt;base64&gt;</span>`;
+      } else if (ctfState.stage === 2) {
+        if (stagePill) {
+          stagePill.className = "px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30";
+          stagePill.textContent = "STAGE 2/3: HASH PREIMAGE";
+        }
+        if (descEl) descEl.innerHTML = `Break adversary SHA-256 digest using <span class="text-cyan-400 font-bold">hash &lt;word&gt;</span> & <span class="text-emerald-400 font-bold">submit &lt;word&gt;</span>`;
+      } else if (ctfState.stage === 3) {
+        if (stagePill) {
+          stagePill.className = "px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30";
+          stagePill.textContent = "STAGE 3/3: PoW BLOCKCHAIN MINER";
+        }
+        if (descEl) descEl.innerHTML = `Mine consensus block nonce with leading zeroes using <span class="text-amber-400 font-bold">mine 3</span>`;
+      }
+    }
+
+    function terminalCtfHint() {
+      const respLine = document.createElement("div");
+      respLine.className = "text-amber-300 whitespace-pre-wrap pl-2 border-l border-amber-500/40 text-xs";
+      if (ctfState.stage === 1) {
+        respLine.innerHTML = `💡 <span class="font-bold text-amber-400">[STAGE 1 HINT]</span>: The adversary packet is encoded in Base64:
+Payload: <span class="text-cyan-300">U0FUX0ZMQUd7Q1lCRVJfQUVHSVNfMjAyNn0=</span>
+Run command: <span class="text-emerald-300 font-bold">decode U0FUX0ZMQUd7Q1lCRVJfQUVHSVNfMjAyNn0=</span>
+Then submit the decoded string: <span class="text-emerald-300 font-bold">submit &lt;flag&gt;</span>`;
+      } else if (ctfState.stage === 2) {
+        respLine.innerHTML = `💡 <span class="font-bold text-amber-400">[STAGE 2 HINT]</span>: SHA-256 Digest is:
+<span class="text-cyan-300">ac4139d653f02e612e190a9f690320505c4e5617ec2d35b8827a75dd93b809a4</span>
+Clue: 9-letter Sanskrit word meaning 'Truth Alone Triumphs' (lowercase). Foundation of Praneeth's SIH flagship!
+Try running: <span class="text-emerald-300 font-bold">hash satyameva</span> and if it matches: <span class="text-emerald-300 font-bold">submit satyameva</span>`;
+      } else if (ctfState.stage === 3) {
+        respLine.innerHTML = `💡 <span class="font-bold text-amber-400">[STAGE 3 HINT]</span>: Satyameva Aegis consensus requires finding a numeric nonce string for data:
+<span class="text-cyan-300">aegis-block-1:&lt;nonce&gt;</span> such that SHA-256 starts with '000'.
+Simply execute: <span class="text-amber-300 font-bold">mine 3</span> to let our browser Web Crypto miner engine calculate it for you!`;
+      } else {
+        respLine.innerHTML = `🎉 All CTF stages completed with maximum score of 300 PTS!`;
+      }
+      terminalBody.appendChild(respLine);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+      playCyberBeep('blip');
+    }
+
+    function triggerCtfGrandCelebration() {
+      ctfState.completed = true;
+      ctfState.score = 300;
+      updateCtfUI();
+      playCyberBeep('fanfare');
+
+      // Unhide Cyber ID Card CTF Badge
+      const idBadge = document.getElementById("ctf-unlocked-badge");
+      if (idBadge) {
+        idBadge.classList.remove("hidden");
+      }
+
+      // Fire confetti celebration
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 140,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+        setTimeout(() => {
+          confetti({
+            particleCount: 80,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+          });
+          confetti({
+            particleCount: 80,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+          });
+        }, 350);
+      }
+    }
+
+    async function runPoWMining(targetPrefix = "000") {
+      const enc = new TextEncoder();
+      let nonce = 0;
+      const batchSize = 350;
+      const t0 = performance.now();
+
+      const printMsg = (html) => {
+        const line = document.createElement("div");
+        line.className = "text-amber-400 font-mono text-xs";
+        line.innerHTML = html;
+        terminalBody.appendChild(line);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      };
+
+      printMsg(`⛏️ [PoW MINER] Searching nonce for payload: <span class="text-white">aegis-block-1:&lt;nonce&gt;</span> (Target Prefix: "${targetPrefix}...")`);
+      playCyberBeep('blip');
+
+      return new Promise((resolve) => {
+        async function step() {
+          for (let i = 0; i < batchSize; i++) {
+            const payload = enc.encode("aegis-block-1:" + nonce);
+            const hashBuf = await window.crypto.subtle.digest("SHA-256", payload);
+            const hashArr = new Uint8Array(hashBuf);
+            if (hashArr[0] === 0 && (hashArr[1] >> 4) === 0) {
+              const hex = Array.from(hashArr).map(b => b.toString(16).padStart(2, '0')).join('');
+              if (hex.startsWith(targetPrefix)) {
+                const t1 = performance.now();
+                printMsg(`✅ <span class="text-emerald-400 font-bold">[BLOCK MINED!]</span> Nonce: <span class="text-cyan-300 font-bold">${nonce}</span> | Hash: <span class="text-emerald-300 font-bold">${hex}</span> (${(t1 - t0).toFixed(0)} ms)`);
+                playCyberBeep('success');
+                resolve({ nonce, hash: hex });
+                return;
+              }
+            }
+            nonce++;
+          }
+          if (nonce % 1400 === 0) {
+            printMsg(`⏳ [MINING IN PROGRESS] Nonces computed: ${nonce}...`);
+            playCyberBeep('blip');
+          }
+          setTimeout(step, 0);
+        }
+        step();
+      });
+    }
+
+    // ==================== INTERACTIVE CYBER TERMINAL IMPLEMENTATION ====================
     const terminalBody = document.getElementById("terminal-body");
     const terminalInput = document.getElementById("terminal-input");
+    const commandHistory = [];
+    let historyPointer = -1;
 
     const terminalCommands = {
-      help: `Available commands:
-  • <span class="text-emerald-400">about</span>     : Background summary & JUIT details
+      help: `Available terminal commands:
+  • <span class="text-emerald-400">ctf</span>       : Launch / inspect Operation Aegis Shield CTF Challenge
+  • <span class="text-emerald-400">hint</span>      : Get tactical intelligence for current CTF stage
+  • <span class="text-emerald-400">submit</span>    : Submit CTF flag or secret (<span class="text-slate-400">submit &lt;flag&gt;</span>)
+  • <span class="text-emerald-400">hash</span>      : Compute live SHA-256 digest (<span class="text-slate-400">hash &lt;text&gt;</span>)
+  • <span class="text-emerald-400">entropy</span>   : Test password entropy bits (<span class="text-slate-400">entropy &lt;password&gt;</span>)
+  • <span class="text-emerald-400">decode</span>    : Decode Base64 string (<span class="text-slate-400">decode &lt;base64&gt;</span>)
+  • <span class="text-emerald-400">encode</span>    : Encode text to Base64 (<span class="text-slate-400">encode &lt;text&gt;</span>)
+  • <span class="text-emerald-400">mine</span>      : Run browser PoW block miner (<span class="text-slate-400">mine 3</span>)
+  • <span class="text-emerald-400">scan</span>      : Simulate network & crypto infrastructure audit
+  • <span class="text-emerald-400">theme</span>     : Change color palette (<span class="text-slate-400">theme matrix|cyber|amber|synth</span>)
+  • <span class="text-emerald-400">sound</span>     : Toggle synthesizer audio effects (<span class="text-slate-400">sound on|off</span>)
+  • <span class="text-emerald-400">about</span>     : Summary & JUIT academic details
   • <span class="text-emerald-400">sih</span>       : SIH 2026 Presentation & Demonstration
   • <span class="text-emerald-400">ridehack</span>  : RIDEHACK'26 Grand Finals at JIIT Noida
-  • <span class="text-emerald-400">ppt</span>       : Official SIH & RIDEHACK presentation decks (.pptx / .pdf)
+  • <span class="text-emerald-400">ppt</span>       : Official presentation decks (.pptx / .pdf)
   • <span class="text-emerald-400">pdf</span>       : Open embedded SIH submission PDF viewer
-  • <span class="text-emerald-400">team</span>      : List Team CYPHER-X rosters (RIDEHACK + SIH)
+  • <span class="text-emerald-400">team</span>      : List Team CYPHER-X rosters
   • <span class="text-emerald-400">projects</span>  : 100% original repositories & tools
-  • <span class="text-emerald-400">skills</span>    : Languages, Linux internals, & security stack
+  • <span class="text-emerald-400">skills</span>    : Languages, security workbench & honors
   • <span class="text-emerald-400">video</span>     : Watch SIH presentation on YouTube
   • <span class="text-emerald-400">github</span>    : View GitHub profile
   • <span class="text-emerald-400">linkedin</span>  : View LinkedIn profile
   • <span class="text-emerald-400">contact</span>   : Dispatch a direct transmission
   • <span class="text-emerald-400">clear</span>     : Clear terminal buffer`,
-      
+
       about: `A Praneeth Sai
 Domain: Cybersecurity, AI & Systems Development
 Education: BTech CSE (Cyber Security) @ Jaypee University of Information Technology (JUIT)
 Location: Ambala, Haryana & Solan, Himachal Pradesh`,
-      
+
       skills: `[Languages]   : Python, C, JavaScript, Bash / Shell, HTML5/CSS3
-[Security]    : Penetration Testing, Linux Internals, Automation, Password Entropy
+[Security]    : Penetration Testing, Linux Internals, Automation, Web Crypto Lab
 [Tools]       : Git, Linux (Ubuntu/Kali), VS Code, LocalStorage API`,
 
       projects: `1. Satyameva Aegis   : Decentralized academic credential issuance (SIH & RIDEHACK Flagship)
@@ -2367,26 +3080,336 @@ Key Highlights:
     };
 
     function terminalClear() {
-      terminalBody.innerHTML = `<div>Terminal buffer cleared. Type <span class="text-cyan-400">help</span> for available commands.</div>`;
+      terminalBody.innerHTML = `<div>Terminal buffer cleared. Type <span class="text-cyan-400">help</span> for available commands, or <span class="text-emerald-400 font-bold">ctf</span> for Operation Aegis Shield.</div>`;
+      playCyberBeep('blip');
     }
 
-    terminalInput.addEventListener("keydown", function(e) {
+    function runTerminalChip(cmd) {
+      if (!terminalInput) return;
+      terminalInput.value = cmd;
+      terminalInput.focus();
+      // Dispatch Enter key event
+      const ev = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+      terminalInput.dispatchEvent(ev);
+    }
+
+    terminalInput.addEventListener("keydown", async function(e) {
+      // Command History Navigation
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (commandHistory.length > 0 && historyPointer < commandHistory.length - 1) {
+          historyPointer++;
+          terminalInput.value = commandHistory[commandHistory.length - 1 - historyPointer];
+        }
+        return;
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (historyPointer > 0) {
+          historyPointer--;
+          terminalInput.value = commandHistory[commandHistory.length - 1 - historyPointer];
+        } else if (historyPointer === 0) {
+          historyPointer = -1;
+          terminalInput.value = "";
+        }
+        return;
+      }
+
+      // Tab Completion
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const cur = terminalInput.value.trim().toLowerCase();
+        if (!cur) return;
+        const validList = ['about', 'sih', 'ridehack', 'ppt', 'pdf', 'team', 'projects', 'skills', 'video', 'github', 'linkedin', 'contact', 'clear', 'ctf', 'hint', 'submit', 'hash', 'entropy', 'mine', 'scan', 'theme', 'sound', 'decode', 'encode'];
+        const matched = validList.find(c => c.startsWith(cur));
+        if (matched) {
+          terminalInput.value = matched;
+          playCyberBeep('blip');
+        }
+        return;
+      }
+
       if (e.key === "Enter") {
-        const cmd = terminalInput.value.trim().toLowerCase();
+        const fullCmd = terminalInput.value.trim();
         terminalInput.value = "";
+        if (!fullCmd) return;
 
-        if (!cmd) return;
+        commandHistory.push(fullCmd);
+        historyPointer = -1;
 
-        // Print user command
+        // Print user command line
         const userLine = document.createElement("div");
-        userLine.innerHTML = `<span class="text-emerald-400 font-bold">visitor@juit:~$</span> <span>${cmd}</span>`;
+        userLine.innerHTML = `<span class="text-emerald-400 font-bold">visitor@juit:~$</span> <span>${fullCmd}</span>`;
         terminalBody.appendChild(userLine);
 
+        const parts = fullCmd.split(" ");
+        const cmd = parts[0].toLowerCase();
+        const arg = parts.slice(1).join(" ").trim();
+
+        playCyberBeep('blip');
+
+        // Dynamic command handling
         if (cmd === "clear") {
           terminalClear();
+        } else if (cmd === "ctf") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-emerald-500/40 text-xs";
+          if (ctfState.completed) {
+            respLine.innerHTML = `🛡️ <span class="text-purple-400 font-bold">OPERATION AEGIS SHIELD (COMPLETED)</span>
+Score: 300 / 300 PTS [100%]
+Status: Verified Identity Badge Unlocked on Cyber ID Card!
+All cryptographic missions cleared.`;
+          } else if (ctfState.stage === 1) {
+            respLine.innerHTML = `🛡️ <span class="text-emerald-400 font-bold">OPERATION AEGIS SHIELD — MISSION BRIEF (STAGE 1/3)</span>
+═══════════════════════════════════════════════════════════
+Objective: Decrypt intercepted adversarial transmission packet.
+Encrypted Payload: <span class="text-cyan-300 font-bold">U0FUX0ZMQUd7Q1lCRVJfQUVHSVNfMjAyNn0=</span>
+
+Instructions:
+  1. Use command <span class="text-cyan-400 font-bold">decode &lt;base64&gt;</span> to reveal the secret flag.
+  2. Once uncovered, run <span class="text-emerald-400 font-bold">submit &lt;flag&gt;</span> to score 100 PTS!
+  3. Type <span class="text-amber-400 font-bold">hint</span> at any time for situational intelligence.`;
+          } else if (ctfState.stage === 2) {
+            respLine.innerHTML = `🛡️ <span class="text-cyan-400 font-bold">OPERATION AEGIS SHIELD — MISSION BRIEF (STAGE 2/3)</span>
+═══════════════════════════════════════════════════════════
+Current Score: 100 / 300 PTS
+Objective: Hash Preimage Attack against adversary signature.
+Target SHA-256 Digest:
+  <span class="text-emerald-300 font-bold">ac4139d653f02e612e190a9f690320505c4e5617ec2d35b8827a75dd93b809a4</span>
+
+Clue: 9-letter lowercase Sanskrit word meaning "Truth Alone Triumphs". Foundational to Satyameva Aegis!
+Instructions:
+  1. Test word candidates using <span class="text-cyan-400 font-bold">hash &lt;word&gt;</span>.
+  2. When match is confirmed, run <span class="text-emerald-400 font-bold">submit &lt;word&gt;</span> for +100 PTS!`;
+          } else if (ctfState.stage === 3) {
+            respLine.innerHTML = `🛡️ <span class="text-amber-400 font-bold">OPERATION AEGIS SHIELD — MISSION BRIEF (STAGE 3/3)</span>
+═══════════════════════════════════════════════════════════
+Current Score: 200 / 300 PTS
+Objective: Proof-of-Work Blockchain Mining Challenge.
+Requirement: Find a nonce for <span class="text-white">aegis-block-1:&lt;nonce&gt;</span> such that SHA-256 starts with '000'.
+
+Instructions:
+  1. Run <span class="text-amber-400 font-bold">mine 3</span> right now to initiate our in-browser Web Crypto block miner.
+  2. Once mined, it will auto-submit and unlock your verified badge!`;
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "hint") {
+          terminalCtfHint();
+        } else if (cmd === "submit") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-xs whitespace-pre-wrap pl-2 border-l";
+          if (!arg) {
+            respLine.className += " text-rose-400 border-rose-500/40";
+            respLine.innerHTML = `Usage: submit &lt;flag_or_secret&gt;`;
+          } else if (ctfState.completed) {
+            respLine.className += " text-purple-300 border-purple-500/40";
+            respLine.innerHTML = `All CTF stages are already completed with 300/300 PTS!`;
+          } else if (ctfState.stage === 1) {
+            if (arg === ctfState.stage1Answer || arg.toUpperCase() === ctfState.stage1Answer) {
+              ctfState.score = 100;
+              ctfState.stage = 2;
+              updateCtfUI();
+              playCyberBeep('success');
+              if (typeof confetti === "function") confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+              respLine.className += " text-emerald-300 border-emerald-500/40";
+              respLine.innerHTML = `🎯 <span class="font-bold text-emerald-400">[STAGE 1 CLEARED!]</span> Flag Verified: <span class="text-white font-bold">${ctfState.stage1Answer}</span>
+Awarded: <span class="text-cyan-300 font-bold">+100 PTS</span> | Current Score: <span class="text-emerald-400 font-bold">100 / 300 PTS</span>
+
+▶ <span class="text-cyan-400 font-bold">STAGE 2 UNLOCKED: HASH PREIMAGE ATTACK</span>
+Adversary left SHA-256 hash: <span class="text-cyan-200">ac4139d653f02e612e190a9f690320505c4e5617ec2d35b8827a75dd93b809a4</span>
+Clue: 9-letter Sanskrit word meaning 'Truth Alone Triumphs' (lowercase).
+Test with: <span class="text-emerald-300 font-bold">hash &lt;word&gt;</span> then <span class="text-emerald-300 font-bold">submit &lt;word&gt;</span>`;
+            } else {
+              playCyberBeep('error');
+              respLine.className += " text-rose-400 border-rose-500/40";
+              respLine.innerHTML = `❌ Incorrect flag for Stage 1. Remember to decode <span class="text-white font-mono">U0FUX0ZMQUd7Q1lCRVJfQUVHSVNfMjAyNn0=</span>`;
+            }
+          } else if (ctfState.stage === 2) {
+            if (arg.toLowerCase() === ctfState.stage2Answer) {
+              ctfState.score = 200;
+              ctfState.stage = 3;
+              updateCtfUI();
+              playCyberBeep('success');
+              if (typeof confetti === "function") confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
+              respLine.className += " text-emerald-300 border-emerald-500/40";
+              respLine.innerHTML = `🎯 <span class="font-bold text-emerald-400">[STAGE 2 CLEARED!]</span> Preimage Verified: <span class="text-white font-bold">${ctfState.stage2Answer}</span>
+Awarded: <span class="text-cyan-300 font-bold">+100 PTS</span> | Current Score: <span class="text-emerald-400 font-bold">200 / 300 PTS</span>
+
+▶ <span class="text-amber-400 font-bold">STAGE 3 UNLOCKED: PoW BLOCKCHAIN MINER</span>
+Mine a block for <span class="text-white font-bold">aegis-block-1:&lt;nonce&gt;</span> with SHA-256 prefix '000'.
+Run: <span class="text-amber-300 font-bold">mine 3</span> in the terminal!`;
+            } else {
+              playCyberBeep('error');
+              respLine.className += " text-rose-400 border-rose-500/40";
+              respLine.innerHTML = `❌ Hash does not match target. Hint: 9-letter root of Satyameva Aegis in lowercase.`;
+            }
+          } else if (ctfState.stage === 3) {
+            const enc = new TextEncoder();
+            const hBuf = await window.crypto.subtle.digest("SHA-256", enc.encode("aegis-block-1:" + arg));
+            const hex = Array.from(new Uint8Array(hBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            if (hex.startsWith(ctfState.stage3Prefix)) {
+              respLine.className += " text-purple-300 border-purple-500/40";
+              respLine.innerHTML = `🎉 <span class="font-bold text-emerald-400">[STAGE 3 CLEARED!]</span> Nonce Verified: <span class="text-white font-bold">${arg}</span>
+Hash: <span class="text-emerald-300 font-mono">${hex}</span>
+Awarded: <span class="text-cyan-300 font-bold">+100 PTS</span> | Final Score: <span class="text-purple-300 font-bold">300 / 300 PTS</span>
+
+═══════════════════════════════════════════════════════════
+🏆 CONGRATULATIONS! ALL 3 CTF DEFENSES CONQUERED!
+CTF Master Badge has been unlocked on your Cyber ID Card!
+═══════════════════════════════════════════════════════════`;
+              triggerCtfGrandCelebration();
+            } else {
+              playCyberBeep('error');
+              respLine.className += " text-rose-400 border-rose-500/40";
+              respLine.innerHTML = `❌ Nonce '${arg}' produces hash '${hex}', which does not start with '${ctfState.stage3Prefix}'. Run 'mine 3' to find a valid nonce automatically!`;
+            }
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "hash") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-cyan-500/40 text-xs";
+          if (!arg) {
+            respLine.innerHTML = `Usage: hash &lt;text_to_hash&gt;`;
+          } else {
+            const enc = new TextEncoder();
+            const t0 = performance.now();
+            const hBuf = await window.crypto.subtle.digest("SHA-256", enc.encode(arg));
+            const t1 = performance.now();
+            const hex = Array.from(new Uint8Array(hBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            respLine.innerHTML = `Algorithm: <span class="text-cyan-300 font-bold">SHA-256 (Web Crypto API)</span>
+Input: <span class="text-white">${arg}</span>
+Digest: <span class="text-emerald-400 font-bold">${hex}</span>
+Compute Time: ${(t1 - t0).toFixed(2)} ms`;
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "entropy") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-purple-500/40 text-xs";
+          if (!arg) {
+            respLine.innerHTML = `Usage: entropy &lt;password_string&gt;`;
+          } else {
+            let pool = 0;
+            if (/[a-z]/.test(arg)) pool += 26;
+            if (/[A-Z]/.test(arg)) pool += 26;
+            if (/[0-9]/.test(arg)) pool += 10;
+            if (/[^a-zA-Z0-9]/.test(arg)) pool += 33;
+            if (pool === 0) pool = 1;
+            const bits = arg.length * Math.log2(pool);
+            const total = Math.pow(pool, arg.length);
+            const sec = total / 1e11;
+            respLine.innerHTML = `Target: <span class="text-white">${arg}</span>
+Entropy: <span class="text-emerald-400 font-bold">${bits.toFixed(1)} bits</span> (Pool Size: ${pool}, Length: ${arg.length})
+Resistance against 10¹¹ H/s cluster: <span class="text-cyan-300 font-bold">${sec < 1 ? '< 1 second' : (sec / 31536000 > 1000 ? '> 1,000 Years' : (sec / 86400).toFixed(1) + ' Days')}</span>`;
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "decode") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-emerald-500/40 text-xs";
+          if (!arg) {
+            respLine.innerHTML = `Usage: decode &lt;base64_string&gt;`;
+          } else {
+            try {
+              const decoded = atob(arg);
+              respLine.innerHTML = `Decoded: <span class="text-emerald-400 font-bold">${decoded}</span>`;
+            } catch (err) {
+              respLine.innerHTML = `<span class="text-rose-400">Invalid Base64 payload.</span>`;
+            }
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "encode") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-cyan-500/40 text-xs";
+          if (!arg) {
+            respLine.innerHTML = `Usage: encode &lt;plaintext_string&gt;`;
+          } else {
+            const encoded = btoa(arg);
+            respLine.innerHTML = `Base64: <span class="text-cyan-300 font-bold">${encoded}</span>`;
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "mine") {
+          const diff = (arg === "4" || arg === "2" || arg === "1") ? parseInt(arg) : 3;
+          const target = "0".repeat(diff);
+          const result = await runPoWMining(target);
+          if (ctfState.stage === 3 && !ctfState.completed && result && result.nonce !== undefined) {
+            const respLine = document.createElement("div");
+            respLine.className = "text-xs whitespace-pre-wrap pl-2 border-l text-purple-300 border-purple-500/40 mt-2";
+            respLine.innerHTML = `🎉 <span class="font-bold text-emerald-400">[STAGE 3 AUTO-VALIDATED!]</span>
+Nonce: <span class="text-white font-bold">${result.nonce}</span>
+Hash: <span class="text-emerald-300 font-mono">${result.hash}</span>
+Awarded: <span class="text-cyan-300 font-bold">+100 PTS</span> | Final Score: <span class="text-purple-300 font-bold">300 / 300 PTS</span>
+
+═══════════════════════════════════════════════════════════
+🏆 CONGRATULATIONS! ALL 3 CTF DEFENSES CONQUERED!
+CTF Master Badge has been unlocked on your Cyber ID Card!
+═══════════════════════════════════════════════════════════`;
+            terminalBody.appendChild(respLine);
+            triggerCtfGrandCelebration();
+          }
+        } else if (cmd === "scan") {
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-cyan-500/40 text-xs font-mono";
+          respLine.innerHTML = `[SCAN] Target: satyameva-aegis.juit (10.12.0.42)
+PORT      STATE  SERVICE         BANNER / PROTOCOL
+443/tcp   OPEN   HTTPS (TLS 1.3) TLS_AES_256_GCM_SHA384 (A+ Grade)
+8545/tcp  OPEN   JSON-RPC        Satyameva PoW Consensus Node (v2.1)
+50051/tcp OPEN   gRPC            OpenCV 128D Face Landmark Ingestion
+51820/udp OPEN   WireGuard       Encrypted Mesh Tunnel
+
+[AUDIT] Cryptographic Security Controls:
+ ✔ Content-Security-Policy: default-src 'self'
+ ✔ Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+ ✔ X-Frame-Options: DENY
+ ✔ PBKDF2 Salt Entropy: 256 bits (100,000 iterations)
+ ✔ Zero Knowledge Proof Anchor: VERIFIED
+Vulnerabilities Found: 0 (System Status: <span class="text-emerald-400 font-bold">IMPENETRABLE</span>)`;
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "theme") {
+          const win = document.getElementById("terminal-window");
+          const promptEl = document.getElementById("terminal-prompt");
+          const mode = arg.toLowerCase();
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 text-xs pl-2 border-l border-cyan-500/40";
+          if (win && (mode === "matrix" || mode === "cyber" || mode === "amber" || mode === "synth")) {
+            if (mode === "matrix") {
+              win.className = "w-full bg-[#05110a] border border-emerald-500/50 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm transition-colors duration-300";
+              if (promptEl) promptEl.className = "text-emerald-400 font-bold";
+            } else if (mode === "cyber") {
+              win.className = "w-full bg-[#0a0f1d] border border-cyan-500/50 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm transition-colors duration-300";
+              if (promptEl) promptEl.className = "text-cyan-400 font-bold";
+            } else if (mode === "amber") {
+              win.className = "w-full bg-[#140e05] border border-amber-500/50 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm transition-colors duration-300";
+              if (promptEl) promptEl.className = "text-amber-400 font-bold";
+            } else if (mode === "synth") {
+              win.className = "w-full bg-[#14081c] border border-purple-500/50 rounded-2xl overflow-hidden shadow-2xl font-mono text-sm transition-colors duration-300";
+              if (promptEl) promptEl.className = "text-pink-400 font-bold";
+            }
+            respLine.innerHTML = `Terminal theme set to <span class="text-cyan-300 font-bold">${mode}</span>.`;
+          } else {
+            respLine.innerHTML = `Available themes: <span class="text-emerald-400">matrix</span> | <span class="text-cyan-400">cyber</span> | <span class="text-amber-400">amber</span> | <span class="text-purple-400">synth</span>`;
+          }
+          terminalBody.appendChild(respLine);
+        } else if (cmd === "sound") {
+          if (arg === "off") {
+            soundEnabled = false;
+          } else if (arg === "on") {
+            soundEnabled = true;
+          } else {
+            soundEnabled = !soundEnabled;
+          }
+          const textEl = document.getElementById("ctf-sound-text");
+          const iconEl = document.getElementById("ctf-sound-icon");
+          if (textEl) textEl.textContent = soundEnabled ? "Audio: ON" : "Audio: OFF";
+          if (iconEl) {
+            iconEl.setAttribute("data-lucide", soundEnabled ? "volume-2" : "volume-x");
+            if (window.lucide) lucide.createIcons();
+          }
+          const respLine = document.createElement("div");
+          respLine.className = "text-slate-300 text-xs pl-2 border-l border-cyan-500/40";
+          respLine.innerHTML = `Audio synthesizer: <span class="text-cyan-300 font-bold">${soundEnabled ? 'ON' : 'OFF'}</span>`;
+          terminalBody.appendChild(respLine);
+          playCyberBeep(soundEnabled ? 'blip' : 'error');
         } else if (terminalCommands[cmd]) {
           const respLine = document.createElement("div");
-          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-emerald-500/40";
+          respLine.className = "text-slate-300 whitespace-pre-wrap pl-2 border-l border-emerald-500/40 text-xs sm:text-sm";
           respLine.innerHTML = terminalCommands[cmd];
           terminalBody.appendChild(respLine);
 
@@ -2414,8 +3437,9 @@ Key Highlights:
         } else {
           const errLine = document.createElement("div");
           errLine.className = "text-rose-400 text-xs";
-          errLine.innerHTML = `Command not recognized: '${cmd}'. Type <span class="text-cyan-300 font-bold">help</span> for a list of valid commands.`;
+          errLine.innerHTML = `Command not recognized: '${cmd}'. Type <span class="text-cyan-300 font-bold">help</span> or <span class="text-emerald-300 font-bold">ctf</span>.`;
           terminalBody.appendChild(errLine);
+          playCyberBeep('error');
         }
 
         // Auto-scroll to bottom
